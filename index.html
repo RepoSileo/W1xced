@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1xced | Open-Core-W1xced</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent: #007AFF;
+            --accent-green: #30D158;
+            --text-main: #ffffff;
+            --text-sec: #8E8E93;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, var(--accent), #5856D6);
+            border-radius: 50%;
+            top: 10%; left: -10%;
+            animation: float 18s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 50px); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Logo / Avatar */
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 34px; /* Apple Squircle */
+            border: 1px solid var(--glass-border);
+            background: #1c1c1e;
+        }
+
+        h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; }
+        .nickname { color: var(--text-sec); font-size: 16px; margin-bottom: 20px; }
+
+        .bio-text {
+            color: var(--text-sec);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .highlight { color: var(--accent); font-weight: 600; }
+
+        /* Unified Card Style */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            text-align: left;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-title {
+            color: var(--text-main);
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-desc {
+            color: var(--text-sec);
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .badge {
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* Countdown */
+        .release-box {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--glass-border);
+        }
+
+        .release-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .countdown-timer {
+            font-family: "SF Mono", monospace;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .unit { display: flex; flex-direction: column; font-weight: 600; }
+        .u-label { font-size: 9px; color: var(--text-sec); text-transform: uppercase; margin-top: 4px; }
+
+        .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); letter-spacing: 2px; opacity: 0.5; }
+
+    </style>
+</head>
+<body>
+
+    <div class="liquid-bg"><div class="blob"></div></div>
+
+    <div class="container">
+        <div class="avatar-container">
+            <img src="Logo.jpg" alt="W1xced" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=W&background=1c1c1e&color=fff'">
+        </div>
+        
+        <h1>W1xced</h1>
+        <p class="nickname">Open-Core-W1xced</p>
+        
+        <p class="bio-text">
+            Specialized in <span class="highlight">Lua Development</span> & <span class="highlight">Reverse Engineering</span>.<br>
+            Focusing on high-end software solutions and system customization.
+        </p>
+
+        <div class="projects">
+            <a href="#" class="card">
+                <div class="card-title">LIBDock <span class="badge" style="color:var(--accent-green)">LIVE</span></div>
+                <div class="card-desc">Advanced macOS-style customization framework for Windows.</div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-title">ACCautoCracker <span class="badge" style="color:#FF9F0A">PRIVATE</span></div>
+                <div class="card-desc">Professional automated game analysis and unlocking tool.</div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-title">MyDockFinder <span class="badge">CRACKED</span></div>
+                <div class="card-desc">YaY Crack MyDockFinder.</div>
+            </a>
+
+            <a href="https://t.me/LIBDock" class="card" style="margin-top: 20px; border-color: rgba(0, 122, 255, 0.3);">
+                <div class="card-title">
+                    Join Telegram
+                    <span style="color: var(--accent);">→</span>
+                </div>
+                <div class="card-desc">Get the latest updates on @LIBDock channel.</div>
+            </a>
+        </div>
+
+        <div class="release-box">
+            <div class="release-label">Release 2.0</div>
+            <div class="countdown-timer" id="timer">
+                <div class="unit"><span id="d">00</span><span class="u-label">days</span></div>
+                <div class="unit"><span id="h">00</span><span class="u-label">hrs</span></div>
+                <div class="unit"><span id="m">00</span><span class="u-label">min</span></div>
+                <div class="unit"><span id="s">00</span><span class="u-label">sec</span></div>
+            </div>
+        </div>
+
+        <div class="footer">DESIGNED IN CALIFORNIA • 2026</div>
+    </div>
+
+    <script>
+        function updateTimer() {
+            const target = new Date('January 1, 2027 00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('d').innerText = d;
+            document.getElementById('h').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('m').innerText = m < 10 ? '0'+m : m;
+            document.getElementById('s').innerText = s < 10 ? '0'+s : s;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
