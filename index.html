@@ -63,17 +63,8 @@
             color: #ffffff;
         }
 
-        #mobile-stub h1 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-
-        #mobile-stub p {
-            font-size: 16px;
-            color: var(--text-sec);
-            line-height: 1.5;
-        }
+        #mobile-stub h1 { font-size: 24px; margin-bottom: 15px; color: var(--accent); }
+        #mobile-stub p { font-size: 16px; color: var(--text-sec); line-height: 1.5; }
 
         @media (max-width: 768px) {
             body { overflow: hidden; }
@@ -99,7 +90,7 @@
             font-size: 20px;
         }
 
-        /* --- BACKGROUND --- */
+        /* --- BACKGROUND BLUR EFFECTS --- */
         .liquid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -166,7 +157,7 @@
         .bio-text { color: var(--text-sec); font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
         .highlight { color: var(--accent); font-weight: 600; }
 
-        /* --- CARDS --- */
+        /* --- CARDS STYLE --- */
         .projects { display: flex; flex-direction: column; gap: 12px; }
         
         .card {
@@ -207,11 +198,8 @@
         .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-        /* --- DOWNLOAD BUTTONS --- */
-        .download-wrapper {
-            position: relative;
-            flex: 1;
-        }
+        /* --- DROPDOWN MENU (ПРОЗРАЧНОЕ СТЕКЛО) --- */
+        .download-wrapper { position: relative; flex: 1; }
 
         .download-btn {
             width: 100%;
@@ -225,26 +213,23 @@
             cursor: pointer;
             display: block;
             text-align: center;
-            transition: opacity 0.2s ease;
         }
-        
-        .download-btn:hover { opacity: 0.9; }
 
         .dropdown-menu {
             position: absolute;
             bottom: calc(100% + 10px);
             left: 0;
             width: 220px; 
-            background: rgba(25, 25, 25, 0.98);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            /* Сделано прозрачным как стекляшка */
+            background: rgba(25, 25, 25, 0.7); 
+            backdrop-filter: blur(30px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             display: none;
             flex-direction: column;
             padding: 6px; 
             z-index: 9999;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
         .dropdown-item {
@@ -252,23 +237,14 @@
             color: rgba(255, 255, 255, 0.95);
             text-decoration: none;
             font-size: 12px;
-            font-weight: 500;
-            border-radius: 10px; 
-            transition: background 0.2s ease;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            transition: background 0.2s;
         }
 
-        .dropdown-item:hover {
-            background: var(--accent); 
-            color: #fff;
-        }
-
-        .dropdown-item span {
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.5);
-        }
+        .dropdown-item:hover { background: var(--accent); color: #fff; }
+        .dropdown-item span { font-size: 9px; color: rgba(255, 255, 255, 0.5); }
 
         .changelog-btn {
             flex: 1;
@@ -282,7 +258,7 @@
             cursor: pointer;
         }
 
-        /* --- MODAL --- */
+        /* --- MODAL STYLE --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
@@ -302,7 +278,7 @@
         .badge.blue { background: rgba(0, 122, 255, 0.2); color: var(--accent); }
         .badge.orange { background: rgba(255, 159, 10, 0.2); color: var(--accent-orange); }
 
-        /* --- TIMER --- */
+        /* --- TIMER BOX --- */
         .release-box {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
@@ -313,43 +289,13 @@
             text-align: center;
         }
         
-        .release-box-title {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 16px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        .release-box-title { font-size: 10px; font-weight: 800; color: var(--accent); margin-bottom: 16px; letter-spacing: 2px; text-transform: uppercase; }
+        .countdown-timer { display: flex; justify-content: center; gap: 20px; }
+        .timer-unit { display: flex; flex-direction: column; align-items: center; }
+        .timer-unit span { font-size: 24px; font-family: monospace; font-weight: 700; }
+        .timer-unit small { font-size: 9px; color: var(--text-sec); margin-top: 4px; }
 
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .timer-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .timer-unit span {
-            font-size: 24px;
-            font-family: monospace;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .timer-unit small {
-            font-size: 9px;
-            color: var(--text-sec);
-            margin-top: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        /* --- HARDWARE SPECS (WORKSTATIONS) --- */
+        /* --- WORKSTATIONS SPECS --- */
         .specs-card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
@@ -358,35 +304,11 @@
             margin-top: 12px;
             padding: 24px;
         }
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .device-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .device-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
-            object-fit: contain;
-        }
-        .device-name {
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-        .spec-line {
-            font-size: 10px;
-            color: var(--text-sec);
-            margin-bottom: 4px;
-            width: 100%;
-        }
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .device-info { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .device-icon { width: 60px; height: 60px; margin-bottom: 15px; object-fit: contain; }
+        .device-name { font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .spec-line { font-size: 10px; color: var(--text-sec); margin-bottom: 4px; width: 100%; display: flex; justify-content: center; gap: 4px; }
         .spec-line b { color: var(--text-main); font-weight: 600; }
         
         .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; text-align: center; }
@@ -558,7 +480,7 @@
                     <p class="spec-line" style="font-size: 9px; margin-top: 5px; opacity: 0.8;">macOS Sequoia 15.7.3</p>
                 </div>
                 <div class="device-info" style="border-left: 1px solid var(--glass-border); padding-left: 15px;">
-                    <img src="LogoWindows.png" alt="Windows" class="device-icon" onerror="this.style.display='none';">
+                    <img src="LogoWindows_dark.png" id="winIcon" alt="Windows" class="device-icon" onerror="this.style.display='none';">
                     <p class="device-name">Windows PC</p>
                     <p class="spec-line">CPU <b>i9 14900k</b></p>
                     <p class="spec-line">Memory <b>32GB</b></p>
@@ -573,11 +495,30 @@
 
     <script>
         function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-            document.getElementById('themeToggle').innerText = document.body.classList.contains('light-mode') ? '🔆' : '🌙';
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.getElementById('themeToggle').innerText = isLight ? '🔆' : '🌙';
+
+            // ЛОГИКА СМЕНЫ ИКОНКИ ДЛЯ WINDOWS
+            const winIcon = document.getElementById('winIcon');
+            if (isLight) {
+                winIcon.src = 'LogoWindows_light.png';
+            } else {
+                winIcon.src = 'LogoWindows_dark.png';
+            }
         }
-        if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').innerText = '🔆'; }
+
+        // Загрузка сохраненной темы
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.getElementById('themeToggle').innerText = '🔆';
+            document.getElementById('winIcon').src = 'LogoWindows_light.png';
+        } else {
+            document.getElementById('winIcon').src = 'LogoWindows_dark.png';
+        }
 
         function toggleDropdown(event) {
             event.stopPropagation();
