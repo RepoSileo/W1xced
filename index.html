@@ -140,7 +140,7 @@
         }
 
         .card:hover .stats-panel {
-            max-height: 350px;
+            max-height: 500px;
             opacity: 1;
             padding: 16px 24px;
             border-top: 1px solid var(--glass-border);
@@ -150,21 +150,82 @@
         .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-        .download-btn {
-            display: block;
-            background: var(--accent);
-            color: #fff;
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .download-btn, .changelog-btn {
+            flex: 1;
             text-align: center;
             padding: 10px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-decoration: none;
-            margin-top: 15px;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
         }
 
-        .download-btn:hover { opacity: 0.9; }
+        .download-btn { background: var(--accent); color: #fff; }
+        .changelog-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid var(--glass-border); }
+        
+        .download-btn:hover { opacity: 0.8; }
+        .changelog-btn:hover { background: rgba(255, 255, 255, 0.15); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1c1c1e;
+            width: 100%;
+            max-width: 400px;
+            max-height: 80vh;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            overflow-y: auto;
+            position: relative;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .log-date { color: var(--accent); font-weight: 700; font-size: 14px; margin-top: 20px; display: block; }
+        .log-version { font-size: 18px; font-weight: 700; margin-bottom: 10px; display: block; }
+        .log-section { margin: 15px 0; font-size: 13px; line-height: 1.6; color: #d1d1d6; }
+        .log-divider { height: 1px; background: var(--glass-border); margin: 15px 0; border: none; }
+        .log-help { font-size: 12px; color: var(--text-sec); font-style: italic; margin-top: 15px; }
+
+        .modal-content::-webkit-scrollbar { width: 5px; }
+        .modal-content::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
 
         .card-header {
             display: flex;
@@ -202,6 +263,58 @@
 
     <div class="liquid-bg"><div class="blob"></div></div>
 
+    <div class="modal-overlay" id="changelogModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size: 20px;">Change Log</h2>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            
+            <span class="log-date">📅 1 January 2026</span>
+            <span class="log-version">v1.7 Release</span>
+            
+            <div class="log-section">
+                <strong>Totally added from Beta/Alpha/dev:</strong><br>
+                • Add - 200+ icons<br>
+                • Add - Test MacOS 26 Icons<br>
+                • Add - MyDockFinder (Last Build)<br>
+                • Add - MacOS 26 Cursor
+            </div>
+            
+            <hr class="log-divider">
+            
+            <div class="log-section">
+                • Fixed - Name icons<br>
+                • Update - ReadMe<br>
+                • Update - Theme
+            </div>
+
+            <div class="log-section">
+                <strong style="color: var(--accent);">What's new add Released?</strong><br>
+                • Add - 90+ icons (MacOS 26)<br>
+                • Add - 40+ icons (MacOS 15)<br>
+                • Add - MacOS 15 Cursor<br>
+                • Add - Management - Documentation about LIBDock<br>
+                • Add - Screenshot for check Design apps in LIBDock/apps<br>
+                • Add - Support Russia Language For ReadMe/Management<br>
+                • Add - Seelen UI v2.4.11 (Apps)<br>
+                • Add - Rainmeter (Apps + theme)<br>
+                • Add - Windhawk (Apps)
+            </div>
+
+            <hr class="log-divider">
+
+            <div class="log-section">
+                • Update - ReadMe (More info)<br>
+                • Fix - Icons MacOS 15 corrected by 70 percent (Sorry)
+            </div>
+
+            <div class="log-help">
+                <strong>Who help:</strong> kRaken, Kanmani Karthick
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="avatar-box">
             <img src="Logo.jpg" id="mainLogo" alt="W1xced" onerror="this.style.display='none'; document.getElementById('fallback').style.zIndex='1';">
@@ -228,9 +341,12 @@
                 <div class="stats-panel">
                     <div class="stat-item"><span class="stat-label">Project Start</span><span class="stat-value">April 13, 2025</span></div>
                     <div class="stat-item"><span class="stat-label">Icons</span><span class="stat-value">1200+ Units</span></div>
-                    <div class="stat-item"><span class="stat-label">Version</span><span class="stat-value">v1.7 Release</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
-                    <a href="https://download1655.mediafire.com/k4kqtsgkb0qgJIHuMP_NJzBG7lTjHLebXN5ApNjDT1h52x5qLMkmaK5jhAgq7ly5QFVms0K1xGELamzZIbqfOF3tGIHmxmRM8BquU0awFsbh1t0leHH9rbw7O-RgJArvoRgQeuBIZ9DKOvc_QufMA54y6tBtmZ3jckMAsElH-cM/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn">Download ZIP</a>
+                    
+                    <div class="btn-group">
+                        <a href="https://download1655.mediafire.com/k4kqtsgkb0qgJIHuMP_NJzBG7lTjHLebXN5ApNjDT1h52x5qLMkmaK5jhAgq7ly5QFVms0K1xGELamzZIbqfOF3tGIHmxmRM8BquU0awFsbh1t0leHH9rbw7O-RgJArvoRgQeuBIZ9DKOvc_QufMA54y6tBtmZ3jckMAsElH-cM/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn">Download ZIP</a>
+                        <button class="changelog-btn" onclick="openModal()">Change Log</button>
+                    </div>
                 </div>
             </div>
 
@@ -297,6 +413,24 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
+
+        const modal = document.getElementById('changelogModal');
+
+        function openModal() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
