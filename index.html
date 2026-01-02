@@ -206,7 +206,7 @@
         }
 
         .card:hover .stats-panel {
-            max-height: 500px;
+            max-height: 800px;
             opacity: 1;
             padding: 16px 24px 20px 24px;
             border-top: 1px solid var(--glass-border);
@@ -396,9 +396,9 @@
                         <div class="download-wrapper">
                             <button class="download-btn" id="lang-dl-zip" onclick="toggleDropdown(event)">Download ZIP</button>
                             <div class="dropdown-menu" id="libdockMenu">
-                                <a href="..." class="dropdown-item">Release <span id="lang-dl-rec">1.7 Released (Recommended)</span></a>
-                                <a href="..." class="dropdown-item">Beta <span>1.7 Alpha 3</span></a>
-                                <a href="..." class="dropdown-item">Alpha <span>1.7 Beta 3</span></a>
+                                <a href="https://download1655.mediafire.com/86mdxt9ma9vgVO5j7RATdCv6GmSnLTorpRQWkeKUdMJcWJHLR6vRzJIFWboDAFOizchUII9NsWIhm3CXRE9p1_kTY7eRfTIOjb5tK02C4mRLOjggkmVZDks0tRIDTJ6lAPFdjIeiImcXR8837PEbedtsXq8y26Vj0tg6qeoMPT0/ler7e3s1bjkq5ep/LIBDock.zip" class="dropdown-item">Release <span id="lang-dl-rec">1.7 Released (Recommended)</span></a>
+                                <a href="https://download853.mediafire.com/sr7ypb5bs2jgf1ZPu7r-J8j1TnYM3fBPfJNCrg6asAlPh5VHoaB-VDM3nIq6jsfHFULgRewBzjql8ro6G-39sXCKExvODeicO9fJ8IZN1mnyplwOy55nIZ1ByZ0Xflz1cx4Bg-g4bBDwPPuwMj0kOSNHgdfQIzuhQM6ziJpZ_GY/ujr7gtur4voe71z/LIBDock.zip" class="dropdown-item">Beta <span>1.7 Alpha 3</span></a>
+                                <a href="https://download1078.mediafire.com/mmw2tgwha29g8gzozbj_PGC8Q3AhldgluvhvHhO6eoAVYRqymsPTuApE55rqgBNHyVP8E561_X7DYiAXyQn1CkKDq3nE2SJEA2BnIqq7Zkhzn0Qme98nvCPi3YNaVCjfF1TQ8rEY_7w9vI_4cHaHwGhMuMDLVPfgBnykRpm7Wr4/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">Alpha <span>1.7 Beta 3</span></a>
                             </div>
                         </div>
                         <button class="changelog-btn" id="lang-cl-btn" onclick="openModal()">Change Log</button>
@@ -417,7 +417,7 @@
                 <div class="stats-panel">
                     <div class="stat-item"><span class="stat-label" id="lang-stat-rel">Released</span><span class="stat-value">December 13</span></div>
                     <div class="stat-item"><span class="stat-label" id="lang-stat-status">Status</span><span class="stat-value">Working</span></div>
-                    <a href="..." class="download-btn" id="lang-dl-zip2" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
+                    <a href="https://download1349.mediafire.com/1axe1e0lx64gJzIRUu1PzlJyazeQqoIaKgkX89X53HAAOViye-cAeyH-PMKkVueCWjcxUMmDLYm77rGEUZi2cmEQnBf6YbzgQowgJEZrWRWz7-XQu7el2R58yUds8r3TOcx4ohSEPnK4lYiQN4zb6JnGot6WcKEplKARQ1oj8RE/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" id="lang-dl-zip2" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
                 </div>
             </div>
 
@@ -492,7 +492,29 @@
                 specsTitle: "MY WORKSTATIONS", chip: "Chip", mem: "Memory", disk: "Disk",
                 footer: "Site By W1xced • 2026",
                 modalTitle: "Change Log", modalClose: "Close",
-                modalBody: `<strong>Totally added from Beta/Alpha/dev:</strong><br>• Add - 200+ icons<br>• Add - Test MacOS 26 Icons<br>• Add - MyDockFinder (Last Build)<br>• Add - MacOS 26 Cursor<br><br><strong style="color: var(--accent);">What's new add Released?</strong><br>• Add - 90+ icons (MacOS 26)<br>• Add - 40+ icons (MacOS 15)<br>• Add - Support Russia Language For ReadMe/Management`
+                modalBody: `
+                    <strong>Totally added from Beta/Alpha/dev:</strong><br>
+                    • Add - 200+ icons<br>
+                    • Add - Test MacOS 26 Icons<br>
+                    • Add - MyDockFinder (Last Build)<br>
+                    • Add - MacOS 26 Cursor<br>
+                    • Fixed - Name icons<br>
+                    • Update - ReadMe<br>
+                    • Update - Theme<br><br>
+                    <strong style="color: var(--accent);">What's new add Released?</strong><br>
+                    • Add - 90+ icons (MacOS 26)<br>
+                    • Add - 40+ icons (MacOS 15)<br>
+                    • Add - MacOS 15 Cursor<br>
+                    • Add - Management - Documentation about LIBDock<br>
+                    • Add - Screenshot for check Design apps in LIBDock/apps<br>
+                    • Add - Support Russia Language For ReadMe/Management<br>
+                    • Add - Seelen UI v2.4.11 (Apps)<br>
+                    • Add - Rainmeter (Apps + theme)<br>
+                    • Add - Windhawk (Apps)<br>
+                    • Update - ReadMe (More info)<br>
+                    • Fix - Icons MacOS 15 corrected by 70 percent (Sorry)<br><br>
+                    <strong>Who help:</strong> kRaken, Kanmani Karthick
+                `
             },
             ru: {
                 mobTitle: "Мобильная версия в разработке",
@@ -508,7 +530,29 @@
                 specsTitle: "МОИ РАБОЧИЕ СТАНЦИИ", chip: "Чип", mem: "Память", disk: "Диск",
                 footer: "Сайт от W1xced • 2026",
                 modalTitle: "Список изменений", modalClose: "Закрыть",
-                modalBody: `<strong>Добавлено из Beta/Alpha/dev:</strong><br>• Добавлено - 200+ иконок<br>• Добавлено - Тест MacOS 26 иконок<br>• Добавлено - MyDockFinder (Last Build)<br>• Добавлено - Курсор MacOS 26<br><br><strong style="color: var(--accent);">Что нового в релизе?</strong><br>• Добавлено - 90+ иконок (MacOS 26)<br>• Добавлено - 40+ иконок (MacOS 15)<br>• Добавлено - Поддержка русского языка для документации`
+                modalBody: `
+                    <strong>Добавлено из Beta/Alpha/dev:</strong><br>
+                    • Добавлено - 200+ иконок<br>
+                    • Добавлено - Тест MacOS 26 иконок<br>
+                    • Добавлено - MyDockFinder (Last Build)<br>
+                    • Добавлено - Курсор MacOS 26<br>
+                    • Исправлено - Названия иконок<br>
+                    • Обновлено - ReadMe<br>
+                    • Обновлено - Тема<br><br>
+                    <strong style="color: var(--accent);">Что нового в релизе?</strong><br>
+                    • Добавлено - 90+ иконок (MacOS 26)<br>
+                    • Добавлено - 40+ иконок (MacOS 15)<br>
+                    • Добавлено - Курсор MacOS 15<br>
+                    • Добавлено - Management - Документация о LIBDock<br>
+                    • Добавлено - Скриншоты дизайна приложений в LIBDock/apps<br>
+                    • Добавлено - Поддержка русского языка для документации<br>
+                    • Добавлено - Seelen UI v2.4.11 (Приложения)<br>
+                    • Добавлено - Rainmeter (Приложения + тема)<br>
+                    • Добавлено - Windhawk (Приложения)<br>
+                    • Обновлено - ReadMe (Больше информации)<br>
+                    • Исправлено - Иконки MacOS 15 исправлены на 70% (Извините)<br><br>
+                    <strong>Кто помогал:</strong> kRaken, Kanmani Karthick
+                `
             },
             ua: {
                 mobTitle: "Мобільна версія у розробці",
@@ -524,7 +568,29 @@
                 specsTitle: "МОЇ РОБОЧІ СТАНЦІЇ", chip: "Чіп", mem: "Пам'ять", disk: "Диск",
                 footer: "Сайт від W1xced • 2026",
                 modalTitle: "Список змін", modalClose: "Закрити",
-                modalBody: `<strong>Додано з Beta/Alpha/dev:</strong><br>• Додано - 200+ іконок<br>• Додано - Тест MacOS 26 іконок<br>• Додано - MyDockFinder (Last Build)<br>• Додано - Курсор MacOS 26<br><br><strong style="color: var(--accent);">Що нового у релізі?</strong><br>• Додано - 90+ іконок (MacOS 26)<br>• Додано - 40+ іконок (MacOS 15)<br>• Додано - Підтримка української мови для документації`
+                modalBody: `
+                    <strong>Додано з Beta/Alpha/dev:</strong><br>
+                    • Додано - 200+ іконок<br>
+                    • Додано - Тест MacOS 26 іконок<br>
+                    • Додано - MyDockFinder (Last Build)<br>
+                    • Додано - Курсор MacOS 26<br>
+                    • Виправлено - Назви іконок<br>
+                    • Оновлено - ReadMe<br>
+                    • Оновлено - Тема<br><br>
+                    <strong style="color: var(--accent);">Що нового у релізі?</strong><br>
+                    • Додано - 90+ іконок (MacOS 26)<br>
+                    • Додано - 40+ іконок (MacOS 15)<br>
+                    • Додано - Курсор MacOS 15<br>
+                    • Додано - Management - Документація про LIBDock<br>
+                    • Додано - Скриншоти дизайну додатків у LIBDock/apps<br>
+                    • Додано - Підтримка української мови для документації<br>
+                    • Додано - Seelen UI v2.4.11 (Додатки)<br>
+                    • Додано - Rainmeter (Додатки + тема)<br>
+                    • Додано - Windhawk (Додатки)<br>
+                    • Оновлено - ReadMe (Більше інформації)<br>
+                    • Виправлено - Іконки MacOS 15 виправлено на 70% (Вибачте)<br><br>
+                    <strong>Хто допомагав:</strong> kRaken, Kanmani Karthick
+                `
             }
         };
 
