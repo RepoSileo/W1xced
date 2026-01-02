@@ -62,10 +62,9 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- BACKGROUND BLOBS --- */
+        /* --- BACKGROUND --- */
         .liquid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -125,61 +124,29 @@
             position: relative;
         }
 
-        .avatar-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
 
         h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; }
         .nickname { color: var(--text-sec); font-size: 16px; margin-bottom: 20px; }
-
-        .bio-text {
-            color: var(--text-sec);
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
+        .bio-text { color: var(--text-sec); font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
         .highlight { color: var(--accent); font-weight: 600; }
 
-        .projects {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        /* --- CARDS --- */
+        .projects { display: flex; flex-direction: column; gap: 12px; }
+        
         .card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             text-align: left;
-            text-decoration: none;
-            display: block;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
+            overflow: visible; 
         }
 
-        .card-content {
-            padding: 20px 24px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: scale(1.01);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        body.light-mode .card:hover {
-            border-color: rgba(0, 0, 0, 0.2);
-        }
+        .card-content { padding: 20px 24px; }
+        .card:hover { transform: scale(1.01); border-color: rgba(255, 255, 255, 0.2); }
 
         .stats-panel {
             max-height: 0;
@@ -187,7 +154,7 @@
             background: rgba(128, 128, 128, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 24px;
-            border-top: 1px solid transparent;
+            overflow: visible; 
         }
 
         .card:hover .stats-panel {
@@ -197,129 +164,145 @@
             border-top: 1px solid var(--glass-border);
         }
 
-        .stat-item { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
-        .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-item { display: flex; justify-content: space-between; margin: 6px 0; }
+        .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
+        /* --- DOWNLOAD DROPDOWN --- */
+        .download-wrapper {
+            position: relative;
+            flex: 1;
         }
 
-        .download-btn, .changelog-btn {
-            display: block;
-            flex: 1;
-            text-align: center;
+        .download-btn {
+            width: 100%;
             padding: 10px;
             border-radius: 12px;
             font-size: 11px;
             font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
             border: none;
-            margin-top: 15px;
+            cursor: pointer;
         }
 
-        .download-btn { background: var(--accent); color: #fff; }
-        .changelog-btn { 
-            background: rgba(128, 128, 128, 0.1); 
-            color: var(--text-main); 
-            border: 1px solid var(--glass-border); 
-            margin-top: 15px; 
-        }
-        
-        .download-btn:hover { opacity: 0.8; }
-        .changelog-btn:hover { background: rgba(128, 128, 128, 0.2); }
 
+.download-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 0;
+    width: 200px; 
+    background: rgba(25, 25, 25, 0.6);
+    backdrop-filter: blur(30px) saturate(200%) brightness(100%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    display: none;
+    flex-direction: column;
+    padding: 6px; 
+    z-index: 10000;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    
+    
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.dropdown-item {
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px; 
+    transition: background 0.15s ease, color 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: none; 
+}
+
+.dropdown-item:hover {
+    background: var(--accent); 
+    color: #fff;
+}
+
+.dropdown-item span {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.1s ease;
+}
+
+.dropdown-item:hover span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Светлая тема */
+body.light-mode .dropdown-menu {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .dropdown-item {
+    color: #000;
+}
+
+body.light-mode .dropdown-item span {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+        .changelog-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(128, 128, 128, 0.1);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        /* --- MODAL --- */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+            z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px;
         }
 
         .modal-content {
             background: var(--modal-bg);
-            width: 100%;
-            max-width: 400px;
-            max-height: 80vh;
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
-            overflow-y: auto;
+            width: 100%; max-width: 420px; max-height: 85vh;
+            border-radius: 35px; border: 1px solid var(--glass-border);
+            padding: 35px; overflow-y: auto; scrollbar-width: none;
             position: relative;
-            padding: 30px;
-            text-align: left;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-
-            /* СКРЫВАЕМ СКРОЛЛБАР */
-            -ms-overflow-style: none;
-            scrollbar-width: none;
         }
+        .modal-content::-webkit-scrollbar { display: none; }
 
-        .modal-content::-webkit-scrollbar {
-            display: none;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .close-modal {
-            background: var(--glass);
-            color: var(--text-main);
-            border: none;
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .log-date { color: var(--accent); font-weight: 700; font-size: 14px; margin-top: 20px; display: block; }
-        .log-version { font-size: 18px; font-weight: 700; margin-bottom: 10px; display: block; }
-        .log-section { margin: 15px 0; font-size: 13px; line-height: 1.6; color: var(--text-sec); }
-        .log-divider { height: 1px; background: var(--glass-border); margin: 15px 0; border: none; }
-        .log-help { font-size: 12px; color: var(--text-sec); font-style: italic; margin-top: 15px; }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-
-        .card-title { color: var(--text-main); font-size: 18px; font-weight: 600; }
-        .card-desc { color: var(--text-sec); font-size: 14px; }
+        .log-date { color: var(--accent); font-weight: 700; font-size: 14px; }
+        .log-version { font-size: 20px; font-weight: 800; margin: 8px 0 15px; display: block; }
+        .log-section { font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px; }
+        .log-divider { height: 1px; background: var(--glass-border); border: none; margin-bottom: 20px; }
 
         .badge { font-size: 10px; padding: 3px 10px; border-radius: 8px; font-weight: 700; text-transform: uppercase; }
-        .badge.blue { background: rgba(0, 122, 255, 0.25); color: var(--accent); }
-        .badge.green { background: rgba(48, 209, 88, 0.15); color: var(--accent-green); }
-        .badge.orange { background: rgba(255, 159, 10, 0.15); color: var(--accent-orange); }
+        .badge.green { background: rgba(48, 209, 88, 0.2); color: var(--accent-green); }
+        .badge.blue { background: rgba(0, 122, 255, 0.2); color: var(--accent); }
+        .badge.orange { background: rgba(255, 159, 10, 0.2); color: var(--accent-orange); }
 
         .release-box {
-            background: var(--glass);
-            border: 1px dashed var(--glass-border);
-            border-radius: 24px;
-            padding: 20px;
-            margin: 25px 0;
+            background: var(--glass); border: 1px dashed var(--glass-border);
+            border-radius: 24px; padding: 25px; margin: 30px 0;
         }
-
-        .release-label { font-size: 11px; font-weight: 800; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .countdown-timer { display: flex; justify-content: center; gap: 15px; font-family: "SF Mono", monospace; font-size: 20px; }
-        .unit { display: flex; flex-direction: column; font-weight: 600; }
-        .u-label { font-size: 9px; color: var(--text-sec); text-transform: uppercase; margin-top: 4px; }
-
-        .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); letter-spacing: 2px; opacity: 0.5; }
-
+        .countdown-timer { display: flex; justify-content: center; gap: 15px; font-size: 22px; font-family: monospace; font-weight: 700; }
+        
+        .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -333,9 +316,9 @@
 
     <div class="modal-overlay" id="changelogModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 style="font-size: 20px;">Change Log</h2>
-                <button class="close-modal" onclick="closeModal()">×</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 style="font-size:22px;">Change Log</h2>
+                <button onclick="closeModal()" style="background:none; border:none; color:#fff; font-size:28px; cursor:pointer;">&times;</button>
             </div>
             
             <span class="log-date">📅 1 January 2026</span>
@@ -377,16 +360,19 @@
                 • Fix - Icons MacOS 15 corrected by 70 percent (Sorry)
             </div>
 
-            <div class="log-help">
-                <strong>Who help:</strong> kRaken, Kanmani Karthick
+            <div style="font-size: 11px; color: var(--text-sec); margin-bottom: 25px;">
+                <strong>Builds:</strong><br>
+                v1.7 (1 Jan 2025) | Beta 3 | Alpha 3 | Dev
             </div>
+            
+            <button class="download-btn" onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <div class="container">
         <div class="avatar-box">
-            <img src="Logo.jpg" id="mainLogo" alt="W1xced" onerror="this.style.display='none'; document.getElementById('fallback').style.zIndex='1';">
-            <div id="fallback" style="position: absolute; font-size: 50px; font-weight: 700; color: #3A3A3C; z-index: -1;">W</div>
+            <img src="Logo.jpg" alt="Logo" onerror="this.style.display='none';">
+            <div style="position:absolute; z-index:-1; font-size:40px; font-weight:bold; color: #333;">W</div>
         </div>
         
         <h1>W1xced</h1>
@@ -398,71 +384,85 @@
         </p>
 
         <div class="projects">
-            <div class="card">
+            <div class="card" onmouseleave="hideDropdown()">
                 <div class="card-content">
-                    <div class="card-header">
-                        <span class="card-title">LIBDock</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:18px; font-weight:600;">LIBDock</span>
                         <span class="badge green">Live</span>
                     </div>
-                    <div class="card-desc">Advanced macOS-style framework for Windows.</div>
+                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Advanced macOS-style framework for Windows.</p>
                 </div>
+                
                 <div class="stats-panel">
                     <div class="stat-item"><span class="stat-label">Project Start</span><span class="stat-value">April 13, 2025</span></div>
                     <div class="stat-item"><span class="stat-label">Version</span><span class="stat-value">v1.7 Release</span></div>
                     <div class="stat-item"><span class="stat-label">Icons</span><span class="stat-value">1200+ Units</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                     
-                    <div class="btn-group">
-                        <a href="https://download1655.mediafire.com/09x1l2boxldgXuQrERiivLkWdHTW2Y1NT7mQk7srd_aHHyCdNeMWL0r1tcUsMQQhL-uIDChzZ1cA1-if7gznb-hUTzszyYVgTp7ZcMFD9mQvHEk44DaJ3peV9uwEbZbt7qvg0gl-vhzVU-aNEU8JhJHDo-m1Tt41furDTeOezhA/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn" style="margin-top: 0;">Download ZIP</a>
-                        <button class="changelog-btn" onclick="openModal()" style="margin-top: 0;">Change Log</button>
+                    <div style="display:flex; gap:10px; margin-top:15px; position:relative;">
+                        <div class="download-wrapper">
+                            <button class="download-btn" onclick="toggleDropdown(event)">Download ZIP</button>
+                            <div class="dropdown-menu" id="libdockMenu">
+                                <a href="https://download1655.mediafire.com/09x1l2boxldgXuQrERiivLkWdHTW2Y1NT7mQk7srd_aHHyCdNeMWL0r1tcUsMQQhL-uIDChzZ1cA1-if7gznb-hUTzszyYVgTp7ZcMFD9mQvHEk44DaJ3peV9uwEbZbt7qvg0gl-vhzVU-aNEU8JhJHDo-m1Tt41furDTeOezhA/ler7e3s1bjkq5ep/LIBDock.zip " class="dropdown-item">
+                                    Release <span>1.7 Released (Recomended)</span>
+                                </a>
+                                <a href="https://download853.mediafire.com/bh7gcojz7msgC3gEgDIJLyJFs2xTGHS3P980mW54Z0DAmr0IpFMBHi-FIdTIFBvszHW2DYoI1y78otqXJHO8tOSI1P2hIxwSyRC-53syHiBAlqNMR19e7ZX8gyMHNY45jcebteTMswC6c9tpl0sLLn0MuNsWWJe34mlezFharXQ/ujr7gtur4voe71z/LIBDock.zip" class="dropdown-item">
+                                    Beta <span>1.7 beta 3 (Last)</span>
+                                </a>
+                                <a href="https://download1078.mediafire.com/rv8syi20qbbgzE-7lUgyqA05m-GRl1QNt2dNUdVhveeZifc6oJqn1fGE3hv_PowBSdyjRiAebSEAlb9vNARTm_M7IzgKxjDcAuIZ6vKa4_2f4pGeZax7QnAKUiSiMX4Tz5x-VgwqKHY98IM2u477NKs6wQgIzQ2OK8ThtnpqMts/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">
+                                    Alpha <span>1.7 Alpha 3 (Last)</span>
+                                </a>
+                            </div>
+                        </div>
+                        <button class="changelog-btn" onclick="openModal()">Log</button>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-content">
-                    <div class="card-header">
-                        <span class="card-title">MyDockFinder</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:18px; font-weight:600;">MyDockFinder</span>
                         <span class="badge blue">Cracked</span>
                     </div>
-                    <div class="card-desc">YaY Crack MyDockFinder.</div>
+                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">YaY Crack MyDockFinder.</p>
                 </div>
                 <div class="stats-panel">
                     <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
-                    <div class="stat-item"><span class="stat-label">Bypass</span><span class="stat-value">Personal</span></div>
+                    <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Working</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
-                    <a href="https://download1349.mediafire.com/5j8692wj10ng1F_BGaORo35Uc9NeXtm0AlEgLnBwdO0m8E6VOBXzagIBxYnln6MZejMuL0WyXPr4JICTMEjONBVloZ92l7TvooMPPgj6OhhOll_DSmJygQg6tbW4zoRG6C-IE3DhRRSBLrPwiMPlPDwT285jwwmUy7Qr5unbCCo/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn">Download ZIP</a>
+                    <a href="https://download1349.mediafire.com/1jvb1g9xwlfgxp6ys8AL0ge6C3VGOiqgskFOuIssde5jcNQSK23JUsopgFf8pj9-T7FsI8O7K3HWpeuGsxwIjVLHDQtBdYk7NkiZ1dPCUh_1-ocyfqgYrHSR_h3kGELcf4FkMKt3js3Ohidh3L4n5ugcpd3ufpJffPLBZS8tReY/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:10px; display:block; text-decoration:none; text-align:center;">Download ZIP</a>
                 </div>
             </div>
 
-            <a href="#" class="card">
+            <div class="card">
                 <div class="card-content">
-                    <div class="card-header">
-                        <span class="card-title">ACCautoCracker</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:18px; font-weight:600;">ACCautoCracker</span>
                         <span class="badge orange">Private</span>
                     </div>
-                    <div class="card-desc">Professional automated game cracking tool.</div>
+                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Professional automated game cracking tool.</p>
                 </div>
-            </a>
+            </div>
 
-            <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4);">
+            <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4); text-decoration: none;">
                 <div class="card-content">
-                    <div class="card-header">
-                        <span class="card-title">Join Telegram Channel</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:18px; font-weight:600; color: #fff;">Join Telegram Channel</span>
                         <span style="color: var(--accent);">→</span>
                     </div>
-                    <div class="card-desc">Get the latest updates on @LIBDock channel.</div>
+                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Get the latest updates on @LIBDock channel.</p>
                 </div>
             </a>
         </div>
 
         <div class="release-box">
-            <div class="release-label">Release 2.0 Countdown</div>
+            <p style="font-size:10px; font-weight:800; color:var(--accent); margin-bottom:12px; letter-spacing:2px;">RELEASE 2.0 COUNTDOWN</p>
             <div class="countdown-timer">
-                <div class="unit"><span id="d">00</span><span class="u-label">days</span></div>
-                <div class="unit"><span id="h">00</span><span class="u-label">hrs</span></div>
-                <div class="unit"><span id="m">00</span><span class="u-label">min</span></div>
-                <div class="unit"><span id="s">00</span><span class="u-label">sec</span></div>
+                <div><span id="d">00</span><br><small style="font-size:9px; color:var(--text-sec);">DAYS</small></div>
+                <div><span id="h">00</span><br><small style="font-size:9px; color:var(--text-sec);">HRS</small></div>
+                <div><span id="m">00</span><br><small style="font-size:9px; color:var(--text-sec);">MIN</small></div>
+                <div><span id="s">00</span><br><small style="font-size:9px; color:var(--text-sec);">SEC</small></div>
             </div>
         </div>
 
@@ -471,28 +471,36 @@
 
     <script>
         function toggleTheme() {
-            const body = document.body;
-            const btn = document.getElementById('themeToggle');
-            body.classList.toggle('light-mode');
-            if (body.classList.contains('light-mode')) {
-                btn.innerText = '🔆';
-                localStorage.setItem('theme', 'light');
-            } else {
-                btn.innerText = '🌑';
-                localStorage.setItem('theme', 'dark');
-            }
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            document.getElementById('themeToggle').innerText = document.body.classList.contains('light-mode') ? '🔆' : '🌙';
         }
-
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             document.getElementById('themeToggle').innerText = '🔆';
         }
 
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('libdockMenu');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function hideDropdown() {
+            document.getElementById('libdockMenu').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.download-btn')) hideDropdown();
+        }
+
+        function openModal() { document.getElementById('changelogModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeModal() { document.getElementById('changelogModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
         function updateTimer() {
             const target = new Date('January 1, 2027 00:00:00').getTime();
             const now = new Date().getTime();
             const diff = target - now;
-            
             if (diff > 0) {
                 document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
                 document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
@@ -502,21 +510,6 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        const modal = document.getElementById('changelogModal');
-        function openModal() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
     </script>
 </body>
 </html>
