@@ -14,6 +14,16 @@
             --accent-orange: #FF9F0A;
             --text-main: #ffffff;
             --text-sec: #8E8E93;
+            --modal-bg: #1c1c1e;
+        }
+
+        body.light-mode {
+            --bg-color: #f2f2f7;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text-main: #000000;
+            --text-sec: #636366;
+            --modal-bg: #ffffff;
         }
 
         * {
@@ -21,6 +31,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
@@ -32,6 +43,26 @@
             min-height: 100vh;
             padding: 40px 20px;
             overflow-x: hidden;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .liquid-bg {
@@ -67,14 +98,14 @@
             width: 120px;
             height: 120px;
             margin: 0 auto 25px;
-            background: #1c1c1e;
+            background: var(--modal-bg);
             border-radius: 35px;
             border: 1px solid var(--glass-border);
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             position: relative;
         }
 
@@ -130,10 +161,14 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
+        body.light-mode .card:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
         .stats-panel {
             max-height: 0;
             opacity: 0;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(128, 128, 128, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 24px;
             border-top: 1px solid transparent;
@@ -172,10 +207,15 @@
         }
 
         .download-btn { background: var(--accent); color: #fff; }
-        .changelog-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid var(--glass-border); margin-top: 15px; }
+        .changelog-btn { 
+            background: rgba(128, 128, 128, 0.1); 
+            color: var(--text-main); 
+            border: 1px solid var(--glass-border); 
+            margin-top: 15px; 
+        }
         
         .download-btn:hover { opacity: 0.8; }
-        .changelog-btn:hover { background: rgba(255, 255, 255, 0.15); }
+        .changelog-btn:hover { background: rgba(128, 128, 128, 0.2); }
 
         .modal-overlay {
             position: fixed;
@@ -190,7 +230,7 @@
         }
 
         .modal-content {
-            background: #1c1c1e;
+            background: var(--modal-bg);
             width: 100%;
             max-width: 400px;
             max-height: 80vh;
@@ -211,8 +251,8 @@
         }
 
         .close-modal {
-            background: rgba(255,255,255,0.1);
-            color: white;
+            background: var(--glass);
+            color: var(--text-main);
             border: none;
             width: 30px; height: 30px;
             border-radius: 50%;
@@ -222,7 +262,7 @@
 
         .log-date { color: var(--accent); font-weight: 700; font-size: 14px; margin-top: 20px; display: block; }
         .log-version { font-size: 18px; font-weight: 700; margin-bottom: 10px; display: block; }
-        .log-section { margin: 15px 0; font-size: 13px; line-height: 1.6; color: #d1d1d6; }
+        .log-section { margin: 15px 0; font-size: 13px; line-height: 1.6; color: var(--text-sec); }
         .log-divider { height: 1px; background: var(--glass-border); margin: 15px 0; border: none; }
         .log-help { font-size: 12px; color: var(--text-sec); font-style: italic; margin-top: 15px; }
 
@@ -236,7 +276,7 @@
             margin-bottom: 4px;
         }
 
-        .card-title { color: #fff; font-size: 18px; font-weight: 600; }
+        .card-title { color: var(--text-main); font-size: 18px; font-weight: 600; }
         .card-desc { color: var(--text-sec); font-size: 14px; }
 
         .badge { font-size: 10px; padding: 3px 10px; border-radius: 8px; font-weight: 700; text-transform: uppercase; }
@@ -245,7 +285,7 @@
         .badge.orange { background: rgba(255, 159, 10, 0.15); color: var(--accent-orange); }
 
         .release-box {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--glass);
             border: 1px dashed var(--glass-border);
             border-radius: 24px;
             padding: 20px;
@@ -262,6 +302,8 @@
     </style>
 </head>
 <body>
+
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
 
     <div class="liquid-bg"><div class="blob"></div></div>
 
@@ -404,35 +446,52 @@
     </div>
 
     <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeToggle');
+            
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                btn.innerText = '🔆';
+                localStorage.setItem('theme', 'light');
+            } else {
+                btn.innerText = '🌑';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.getElementById('themeToggle').innerText = '🔆';
+        }
+
         function updateTimer() {
             const target = new Date('January 1, 2027 00:00:00').getTime();
             const now = new Date().getTime();
             const diff = target - now;
             
-            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
         }
         setInterval(updateTimer, 1000);
         updateTimer();
 
         const modal = document.getElementById('changelogModal');
-
         function openModal() {
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-
         function closeModal() {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) closeModal();
         }
     </script>
 </body>
