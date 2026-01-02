@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Not Found | W1xced</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent: #007AFF;
+            --text-main: #ffffff;
+            --text-sec: #8E8E93;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Тот же фон, что и на главной */
+        .liquid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.4;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, var(--accent), #5856D6);
+            border-radius: 50%;
+            top: 10%; left: -5%;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+
+        .blob-right {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: linear-gradient(135deg, #0047AB, #8E56D6);
+            border-radius: 50%;
+            bottom: -15%; right: -10%;
+            animation: moveRight 25s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 50px); }
+        }
+
+        @keyframes moveRight {
+            from { transform: translate(0, 0); }
+            to { transform: translate(-100px, -100px); }
+        }
+
+        .error-container {
+            text-align: center;
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            padding: 50px 40px;
+            border-radius: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 80px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-sec);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob"></div>
+        <div class="blob-right"></div>
+    </div>
+
+    <div class="error-container">
+        <h1>404</h1>
+        <p>Страница не найдена или была перемещена.</p>
+        <a href="index.html" class="home-btn">Вернуться домой</a>
+    </div>
+
+</body>
+</html>
