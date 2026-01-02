@@ -143,6 +143,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: visible; 
+            text-decoration: none; /* Убирает подчеркивание */
+            color: inherit; /* Предотвращает фиолетовый цвет ссылок */
         }
 
         .card-content { padding: 20px 24px; }
@@ -186,77 +188,68 @@
             cursor: pointer;
         }
 
+        .dropdown-menu {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 0;
+            width: 200px; 
+            background: rgba(25, 25, 25, 0.6);
+            backdrop-filter: blur(30px) saturate(200%) brightness(100%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: none;
+            flex-direction: column;
+            padding: 6px; 
+            z-index: 10000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: translateZ(0);
+            -webkit-font-smoothing: antialiased;
+        }
 
-.download-wrapper {
-    position: relative;
-    flex: 1;
-}
+        .dropdown-item {
+            padding: 8px 12px;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 10px; 
+            transition: background 0.15s ease, color 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            border: none; 
+        }
 
-.dropdown-menu {
-    position: absolute;
-    bottom: calc(100% + 12px);
-    left: 0;
-    width: 200px; 
-    background: rgba(25, 25, 25, 0.6);
-    backdrop-filter: blur(30px) saturate(200%) brightness(100%);
-    -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    display: none;
-    flex-direction: column;
-    padding: 6px; 
-    z-index: 10000;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-    
-    
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-}
+        .dropdown-item:hover {
+            background: var(--accent); 
+            color: #fff;
+        }
 
+        .dropdown-item span {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.1s ease;
+        }
 
-.dropdown-item {
-    padding: 8px 12px;
-    color: rgba(255, 255, 255, 0.95);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 10px; 
-    transition: background 0.15s ease, color 0.1s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    border: none; 
-}
+        .dropdown-item:hover span {
+            color: rgba(255, 255, 255, 0.8);
+        }
 
-.dropdown-item:hover {
-    background: var(--accent); 
-    color: #fff;
-}
+        /* Светлая тема */
+        body.light-mode .dropdown-menu {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
 
-.dropdown-item span {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    transition: color 0.1s ease;
-}
+        body.light-mode .dropdown-item {
+            color: #000;
+        }
 
-.dropdown-item:hover span {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Светлая тема */
-body.light-mode .dropdown-menu {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .dropdown-item {
-    color: #000;
-}
-
-body.light-mode .dropdown-item span {
-    color: rgba(0, 0, 0, 0.4);
-}
+        body.light-mode .dropdown-item span {
+            color: rgba(0, 0, 0, 0.4);
+        }
 
         .changelog-btn {
             flex: 1;
@@ -318,7 +311,7 @@ body.light-mode .dropdown-item span {
         <div class="modal-content">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                 <h2 style="font-size:22px;">Change Log</h2>
-                <button onclick="closeModal()" style="background:none; border:none; color:#fff; font-size:28px; cursor:pointer;">&times;</button>
+                <button onclick="closeModal()" style="background:none; border:none; color:var(--text-main); font-size:28px; cursor:pointer;">&times;</button>
             </div>
             
             <span class="log-date">📅 1 January 2026</span>
@@ -388,9 +381,9 @@ body.light-mode .dropdown-item span {
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:18px; font-weight:600;">LIBDock</span>
-                        <span class="badge green">Live</span>
+                        <span class="badge green">Worked</span>
                     </div>
-                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Advanced macOS-style framework for Windows.</p>
+                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Advanced macOS-style for Windows.</p>
                 </div>
                 
                 <div class="stats-panel">
@@ -403,18 +396,18 @@ body.light-mode .dropdown-item span {
                         <div class="download-wrapper">
                             <button class="download-btn" onclick="toggleDropdown(event)">Download ZIP</button>
                             <div class="dropdown-menu" id="libdockMenu">
-                                <a href="https://download1655.mediafire.com/09x1l2boxldgXuQrERiivLkWdHTW2Y1NT7mQk7srd_aHHyCdNeMWL0r1tcUsMQQhL-uIDChzZ1cA1-if7gznb-hUTzszyYVgTp7ZcMFD9mQvHEk44DaJ3peV9uwEbZbt7qvg0gl-vhzVU-aNEU8JhJHDo-m1Tt41furDTeOezhA/ler7e3s1bjkq5ep/LIBDock.zip " class="dropdown-item">
+                                <a href="https://download1655.mediafire.com/15d3sdrmfu4g00hmM_1ss16gZTuhPZsLXbjL26EqiBVPmYf3pUZvL6AW9LqpXqakXdroceM5MYSSftCnZpKt1GWgPQznVFqCiW_r2P9Cc4yxQnEU8eBpSRM0PTwfwO_j4XZadiCl1ZAL-5kdS9DlL56yyT-5D69PfYLRBNQ8_Ts/ler7e3s1bjkq5ep/LIBDock.zip" class="dropdown-item">
                                     Release <span>1.7 Released (Recomended)</span>
                                 </a>
-                                <a href="https://download853.mediafire.com/bh7gcojz7msgC3gEgDIJLyJFs2xTGHS3P980mW54Z0DAmr0IpFMBHi-FIdTIFBvszHW2DYoI1y78otqXJHO8tOSI1P2hIxwSyRC-53syHiBAlqNMR19e7ZX8gyMHNY45jcebteTMswC6c9tpl0sLLn0MuNsWWJe34mlezFharXQ/ujr7gtur4voe71z/LIBDock.zip" class="dropdown-item">
-                                    Beta <span>1.7 beta 3 (Last)</span>
+                                <a href="https://download1078.mediafire.com/hj86yg5pc8og3_b1CyAW_xCQQFrh45kG54Mn7Xs73FoBnoEdMXdTqz37oyQLcBANWZhVkhuI8xULPcMKt4LWsRFB8y3-1Zsg9Fcxsk4YbUWPLreUNfWdocZ5adTOOANO-jeoE-vFOJikq60d6Lv1Boy_tXvxv9djtAbU18Cf6Qs/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">
+                                    Beta <span>1.7 Alpha 3 (Last)</span>
                                 </a>
-                                <a href="https://download1078.mediafire.com/rv8syi20qbbgzE-7lUgyqA05m-GRl1QNt2dNUdVhveeZifc6oJqn1fGE3hv_PowBSdyjRiAebSEAlb9vNARTm_M7IzgKxjDcAuIZ6vKa4_2f4pGeZax7QnAKUiSiMX4Tz5x-VgwqKHY98IM2u477NKs6wQgIzQ2OK8ThtnpqMts/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">
-                                    Alpha <span>1.7 Alpha 3 (Last)</span>
+                                <a href="https://download853.mediafire.com/llp8cpyzhbxgush8dzqqX7zCKYKnwbM7xSNxNUz8ZecWiS-TKOOhofJjFg_4F-tYQmoWa7HaKefDC-8lp5hyW2T99-e1ULdkLfyEedy1yiI1BfyeDeDR7wtAVsVXx8EA2obUSeP78KBC6q_ki7ILct63xtNqRmwvKm-InVyRwdo/ujr7gtur4voe71z/LIBDock.zip" class="dropdown-item">
+                                    Alpha <span>1.7 Beta 3 (Last)</span>
                                 </a>
                             </div>
                         </div>
-                        <button class="changelog-btn" onclick="openModal()">Log</button>
+                        <button class="changelog-btn" onclick="openModal()">Change Log</button>
                     </div>
                 </div>
             </div>
@@ -431,7 +424,7 @@ body.light-mode .dropdown-item span {
                     <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
                     <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Working</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
-                    <a href="https://download1349.mediafire.com/1jvb1g9xwlfgxp6ys8AL0ge6C3VGOiqgskFOuIssde5jcNQSK23JUsopgFf8pj9-T7FsI8O7K3HWpeuGsxwIjVLHDQtBdYk7NkiZ1dPCUh_1-ocyfqgYrHSR_h3kGELcf4FkMKt3js3Ohidh3L4n5ugcpd3ufpJffPLBZS8tReY/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:10px; display:block; text-decoration:none; text-align:center;">Download ZIP</a>
+                    <a href="https://download1349.mediafire.com/v1rj5cduhzugDN6RZELkyJFT4nXyWvQJ_5nuPsfZR7FSSGPcM0b1gHLOeUbwfkJgiToauaoqDV6gCskyZb0ZQ7R01sje6AB3FRN7nNncr_gWxdxACneCkGMpJMxspjwV5F30WIscYXcY9akeZuHlALULMZcuZz-5fDbU72rYJd8/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:10px; display:block; text-decoration:none; text-align:center;">Download ZIP</a>
                 </div>
             </div>
 
@@ -445,10 +438,10 @@ body.light-mode .dropdown-item span {
                 </div>
             </div>
 
-            <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4); text-decoration: none;">
+            <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4);">
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size:18px; font-weight:600; color: #fff;">Join Telegram Channel</span>
+                        <span style="font-size:18px; font-weight:600; color: var(--text-main);">Join Telegram Channel</span>
                         <span style="color: var(--accent);">→</span>
                     </div>
                     <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Get the latest updates on @LIBDock channel.</p>
@@ -457,7 +450,7 @@ body.light-mode .dropdown-item span {
         </div>
 
         <div class="release-box">
-            <p style="font-size:10px; font-weight:800; color:var(--accent); margin-bottom:12px; letter-spacing:2px;">RELEASE 2.0 COUNTDOWN</p>
+            <p style="font-size:10px; font-weight:800; color:var(--accent); margin-bottom:12px; letter-spacing:2px;">COUNTDOWN 2027 YEARS</p>
             <div class="countdown-timer">
                 <div><span id="d">00</span><br><small style="font-size:9px; color:var(--text-sec);">DAYS</small></div>
                 <div><span id="h">00</span><br><small style="font-size:9px; color:var(--text-sec);">HRS</small></div>
