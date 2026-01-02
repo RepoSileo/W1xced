@@ -169,7 +169,7 @@
         /* --- CARDS --- */
         .projects { display: flex; flex-direction: column; gap: 12px; }
         
-        .card {
+        .card, .release-box {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid var(--glass-border);
@@ -317,11 +317,48 @@
         .badge.blue { background: rgba(0, 122, 255, 0.2); color: var(--accent); }
         .badge.orange { background: rgba(255, 159, 10, 0.2); color: var(--accent-orange); }
 
+        /* --- TIMER CARD REDESIGN --- */
         .release-box {
-            background: var(--glass); border: 1px dashed var(--glass-border);
-            border-radius: 24px; padding: 25px; margin: 30px 0;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: center;
         }
-        .countdown-timer { display: flex; justify-content: center; gap: 15px; font-size: 22px; font-family: monospace; font-weight: 700; }
+        
+        .release-box-title {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-unit span {
+            font-size: 24px;
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .timer-unit small {
+            font-size: 9px;
+            color: var(--text-sec);
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
         
         .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; }
     </style>
@@ -329,7 +366,7 @@
 <body>
 
     <div id="mobile-stub">
-        <div style="font-size: 50px; margin-bottom: 20px;">Sorry</div>
+        <div style="font-size: 50px; margin-bottom: 20px;">📱</div>
         <h1>Mobile version is under development</h1>
         <p>Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
     </div>
@@ -484,12 +521,12 @@
         </div>
 
         <div class="release-box">
-            <p style="font-size:10px; font-weight:800; color:var(--accent); margin-bottom:12px; letter-spacing:2px;">COUNTDOWN 2027 YEARS</p>
+            <p class="release-box-title">COUNTDOWN 2027 YEARS</p>
             <div class="countdown-timer">
-                <div><span id="d">00</span><br><small style="font-size:9px; color:var(--text-sec);">DAYS</small></div>
-                <div><span id="h">00</span><br><small style="font-size:9px; color:var(--text-sec);">HRS</small></div>
-                <div><span id="m">00</span><br><small style="font-size:9px; color:var(--text-sec);">MIN</small></div>
-                <div><span id="s">00</span><br><small style="font-size:9px; color:var(--text-sec);">SEC</small></div>
+                <div class="timer-unit"><span id="d">00</span><small>DAYS</small></div>
+                <div class="timer-unit"><span id="h">00</span><small>HRS</small></div>
+                <div class="timer-unit"><span id="m">00</span><small>MIN</small></div>
+                <div class="timer-unit"><span id="s">00</span><small>SEC</small></div>
             </div>
         </div>
 
