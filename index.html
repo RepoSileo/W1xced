@@ -169,7 +169,7 @@
         /* --- CARDS --- */
         .projects { display: flex; flex-direction: column; gap: 12px; }
         
-        .card, .release-box, .specs-card {
+        .card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid var(--glass-border);
@@ -177,7 +177,6 @@
             text-align: left;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden; 
             text-decoration: none;
             color: inherit;
         }
@@ -192,13 +191,16 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 24px;
             overflow: hidden;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
         }
 
         .card:hover .stats-panel {
             max-height: 500px;
             opacity: 1;
-            padding: 16px 24px;
+            padding: 16px 24px 24px 24px;
             border-top: 1px solid var(--glass-border);
+            overflow: visible;
         }
 
         .stat-item { display: flex; justify-content: space-between; margin: 6px 0; }
@@ -227,29 +229,29 @@
 
         .dropdown-menu {
             position: absolute;
-            bottom: calc(100% + 12px);
+            bottom: calc(100% + 10px);
             left: 0;
-            width: 220px; 
-            background: rgba(25, 25, 25, 0.85);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            width: 240px; 
+            background: rgba(25, 25, 25, 0.95);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
             display: none;
             flex-direction: column;
             padding: 8px; 
-            z-index: 10000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
         }
 
         .dropdown-item {
-            padding: 10px 12px;
+            padding: 12px 14px;
             color: rgba(255, 255, 255, 0.95);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
-            border-radius: 10px; 
-            transition: background 0.15s ease;
+            border-radius: 12px; 
+            transition: background 0.2s ease;
             display: flex;
             flex-direction: column;
             gap: 2px;
@@ -269,15 +271,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        body.light-mode .dropdown-menu {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-mode .dropdown-item { color: #000; }
-        body.light-mode .dropdown-item span { color: rgba(0, 0, 0, 0.4); }
-
         .changelog-btn {
             flex: 1;
             padding: 10px;
@@ -294,7 +287,7 @@
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
-            z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px;
+            z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;
         }
 
         .modal-content {
@@ -304,20 +297,18 @@
             padding: 35px; overflow-y: auto; scrollbar-width: none;
             position: relative;
         }
-        .modal-content::-webkit-scrollbar { display: none; }
-
-        .log-date { color: var(--accent); font-weight: 700; font-size: 14px; }
-        .log-version { font-size: 20px; font-weight: 800; margin: 8px 0 15px; display: block; }
-        .log-section { font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px; }
-        .log-divider { height: 1px; background: var(--glass-border); border: none; margin-bottom: 20px; }
 
         .badge { font-size: 10px; padding: 3px 10px; border-radius: 8px; font-weight: 700; text-transform: uppercase; }
         .badge.green { background: rgba(48, 209, 88, 0.2); color: var(--accent-green); }
         .badge.blue { background: rgba(0, 122, 255, 0.2); color: var(--accent); }
         .badge.orange { background: rgba(255, 159, 10, 0.2); color: var(--accent-orange); }
 
-        /* --- TIMER CARD --- */
+        /* --- TIMER --- */
         .release-box {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             padding: 24px;
             margin: 20px 0;
             text-align: center;
@@ -359,10 +350,15 @@
             text-transform: uppercase;
         }
 
-        /* --- HARDWARE SPECS STYLE --- */
+        /* --- HARDWARE SPECS --- */
         .specs-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             margin-top: 12px;
-            padding: 20px;
+            padding: 24px;
+            text-align: left;
         }
         .specs-grid {
             display: grid;
@@ -378,7 +374,7 @@
         .device-icon {
             width: 64px;
             height: 64px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             object-fit: contain;
         }
         .device-name {
@@ -390,18 +386,18 @@
         .spec-line {
             font-size: 10px;
             color: var(--text-sec);
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             width: 100%;
         }
         .spec-line b { color: var(--text-main); font-weight: 600; }
         
-        .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; }
+        .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; text-align: center; }
     </style>
 </head>
 <body>
 
     <div id="mobile-stub">
-        <div style="font-size: 50px; margin-bottom: 20px;">📱</div>
+        <div style="font-size: 50px; margin-bottom: 20px;">Sorry</div>
         <h1>Mobile version is under development</h1>
         <p>Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
     </div>
@@ -420,10 +416,10 @@
                 <button onclick="closeModal()" style="background:none; border:none; color:var(--text-main); font-size:28px; cursor:pointer;">&times;</button>
             </div>
             
-            <span class="log-date">📅 1 January 2026</span>
-            <span class="log-version">v1.7 Release</span>
+            <span class="log-date" style="color: var(--accent); font-weight: 700; font-size: 14px;">📅 1 January 2026</span>
+            <span class="log-version" style="font-size: 20px; font-weight: 800; margin: 8px 0 15px; display: block;">v1.7 Release</span>
             
-            <div class="log-section">
+            <div style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px;">
                 <strong>Totally added from Beta/Alpha/dev:</strong><br>
                 • Add - 200+ icons<br>
                 • Add - Test MacOS 26 Icons<br>
@@ -431,15 +427,15 @@
                 • Add - MacOS 26 Cursor
             </div>
             
-            <hr class="log-divider">
+            <hr style="height: 1px; background: var(--glass-border); border: none; margin-bottom: 20px;">
             
-            <div class="log-section">
+            <div style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px;">
                 • Fixed - Name icons<br>
                 • Update - ReadMe<br>
                 • Update - Theme
             </div>
 
-            <div class="log-section">
+            <div style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px;">
                 <strong style="color: var(--accent);">What's new add Released?</strong><br>
                 • Add - 90+ icons (MacOS 26)<br>
                 • Add - 40+ icons (MacOS 15)<br>
@@ -450,13 +446,6 @@
                 • Add - Seelen UI v2.4.11 (Apps)<br>
                 • Add - Rainmeter (Apps + theme)<br>
                 • Add - Windhawk (Apps)
-            </div>
-
-            <hr class="log-divider">
-
-            <div class="log-section">
-                • Update - ReadMe (More info)<br>
-                • Fix - Icons MacOS 15 corrected by 70 percent (Sorry)
             </div>
 
             <div style="font-size: 11px; color: var(--text-sec); margin-bottom: 25px;">
@@ -498,12 +487,12 @@
                     <div class="stat-item"><span class="stat-label">Icons</span><span class="stat-value">1200+ Units</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                     
-                    <div style="display:flex; gap:10px; margin-top:15px; position:relative;">
+                    <div style="display:flex; gap:10px; margin-top:20px; position:relative;">
                         <div class="download-wrapper">
                             <button class="download-btn" onclick="toggleDropdown(event)">Download ZIP</button>
                             <div class="dropdown-menu" id="libdockMenu">
                                 <a href="https://download1655.mediafire.com/15d3sdrmfu4g00hmM_1ss16gZTuhPZsLXbjL26EqiBVPmYf3pUZvL6AW9LqpXqakXdroceM5MYSSftCnZpKt1GWgPQznVFqCiW_r2P9Cc4yxQnEU8eBpSRM0PTwfwO_j4XZadiCl1ZAL-5kdS9DlL56yyT-5D69PfYLRBNQ8_Ts/ler7e3s1bjkq5ep/LIBDock.zip" class="dropdown-item">
-                                    Release <span>1.7 Released (Recomended)</span>
+                                    Release <span>1.7 Released (Recommended)</span>
                                 </a>
                                 <a href="https://download1078.mediafire.com/hj86yg5pc8og3_b1CyAW_xCQQFrh45kG54Mn7Xs73FoBnoEdMXdTqz37oyQLcBANWZhVkhuI8xULPcMKt4LWsRFB8y3-1Zsg9Fcxsk4YbUWPLreUNfWdocZ5adTOOANO-jeoE-vFOJikq60d6Lv1Boy_tXvxv9djtAbU18Cf6Qs/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">
                                     Beta <span>1.7 Alpha 3 (Last)</span>
@@ -530,7 +519,7 @@
                     <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
                     <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Working</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
-                    <a href="https://download1349.mediafire.com/v1rj5cduhzugDN6RZELkyJFT4nXyWvQJ_5nuPsfZR7FSSGPcM0b1gHLOeUbwfkJgiToauaoqDV6gCskyZb0ZQ7R01sje6AB3FRN7nNncr_gWxdxACneCkGMpJMxspjwV5F30WIscYXcY9akeZuHlALULMZcuZz-5fDbU72rYJd8/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:10px; display:block; text-decoration:none; text-align:center;">Download ZIP</a>
+                    <a href="https://download1349.mediafire.com/v1rj5cduhzugDN6RZELkyJFT4nXyWvQJ_5nuPsfZR7FSSGPcM0b1gHLOeUbwfkJgiToauaoqDV6gCskyZb0ZQ7R01sje6AB3FRN7nNncr_gWxdxACneCkGMpJMxspjwV5F30WIscYXcY9akeZuHlALULMZcuZz-5fDbU72rYJd8/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:15px; text-decoration:none;">Download ZIP</a>
                 </div>
             </div>
 
@@ -547,7 +536,7 @@
             <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4); margin-top: 12px;">
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size:18px; font-weight:600; color: var(--text-main);">Join Telegram Channel</span>
+                        <span style="font-size:18px; font-weight:600;">Join Telegram Channel</span>
                         <span style="color: var(--accent);">→</span>
                     </div>
                     <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Get the latest updates on @LIBDock channel.</p>
@@ -566,7 +555,7 @@
         </div>
 
         <div class="specs-card">
-            <p style="font-size: 10px; font-weight: 800; color: var(--accent); margin-bottom: 15px; text-align: center; letter-spacing: 1.5px;">MY WORKSTATIONS</p>
+            <p style="font-size: 10px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; letter-spacing: 1.5px;">MY WORKSTATIONS</p>
             <div class="specs-grid">
                 <div class="device-info">
                     <img src="LogoMacBook.png" alt="MacBook" class="device-icon" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'; this.style.opacity='0.4';">
@@ -577,7 +566,7 @@
                     <p class="spec-line" style="font-size: 9px; margin-top: 5px; opacity: 0.8;">macOS Sequoia 15.7.3</p>
                 </div>
                 <div class="device-info" style="border-left: 1px solid var(--glass-border); padding-left: 15px;">
-                    <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(0,122,255,0.3));">🖥️</div>
+                    <div style="font-size: 44px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,122,255,0.3));">🖥️</div>
                     <p class="device-name">Windows PC</p>
                     <p class="spec-line">CPU <b>i9 14900k</b></p>
                     <p class="spec-line">Memory <b>32GB</b></p>
