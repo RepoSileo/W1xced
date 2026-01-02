@@ -152,7 +152,20 @@
 
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; }
+        /* ТИПИЗАЦИЯ НИКНЕЙМА */
+        h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; min-height: 38px; }
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
         .nickname { color: var(--text-sec); font-size: 16px; margin-bottom: 20px; }
         .bio-text { color: var(--text-sec); font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
         .highlight { color: var(--accent); font-weight: 600; }
@@ -198,7 +211,7 @@
         .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-        /* --- DROPDOWN MENU (ПРОЗРАЧНОЕ СТЕКЛО) --- */
+        /* --- DROPDOWN MENU --- */
         .download-wrapper { position: relative; flex: 1; }
 
         .download-btn {
@@ -220,7 +233,6 @@
             bottom: calc(100% + 10px);
             left: 0;
             width: 220px; 
-            /* Сделано прозрачным как стекляшка */
             background: rgba(25, 25, 25, 0.7); 
             backdrop-filter: blur(30px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -377,7 +389,7 @@
             <div style="position:absolute; z-index:-1; font-size:40px; font-weight:bold; color: #333;">W</div>
         </div>
         
-        <h1>W1xced</h1>
+        <h1 id="typing-nick"></h1>
         <p class="nickname">Open-Core-W1xced</p>
         
         <p class="bio-text">
@@ -494,6 +506,27 @@
     </div>
 
     <script>
+        
+        const nickName = "W1xced";
+        const typingElement = document.getElementById('typing-nick');
+        let index = 0;
+
+        function type() {
+            if (index < nickName.length) {
+                typingElement.innerHTML = nickName.slice(0, index + 1) + '<span class="cursor"></span>';
+                index++;
+                setTimeout(type, 150); 
+            } else {
+                
+                typingElement.innerHTML = nickName + '<span class="cursor"></span>';
+            }
+        }
+
+        
+        window.addEventListener('load', () => {
+            setTimeout(type, 500); 
+        });
+
         function toggleTheme() {
             const body = document.body;
             body.classList.toggle('light-mode');
@@ -502,7 +535,6 @@
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
             document.getElementById('themeToggle').innerText = isLight ? '🔆' : '🌙';
 
-            // ЛОГИКА СМЕНЫ ИКОНКИ ДЛЯ WINDOWS
             const winIcon = document.getElementById('winIcon');
             if (isLight) {
                 winIcon.src = 'LogoWindows_light.png';
@@ -511,7 +543,6 @@
             }
         }
 
-        // Загрузка сохраненной темы
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             document.getElementById('themeToggle').innerText = '🔆';
