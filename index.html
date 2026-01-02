@@ -45,6 +45,41 @@
             overflow-x: hidden;
         }
 
+        /* --- MOBILE STUB STYLE --- */
+        #mobile-stub {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        #mobile-stub h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        #mobile-stub p {
+            font-size: 16px;
+            color: var(--text-sec);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            body { overflow: hidden; }
+            #mobile-stub { display: flex; }
+        }
+
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -164,7 +199,7 @@
             opacity: 1;
             padding: 16px 24px;
             border-top: 1px solid var(--glass-border);
-            overflow: visible; /* Позволяет dropdown выходить за границы */
+            overflow: visible;
         }
 
         .stat-item { display: flex; justify-content: space-between; margin: 6px 0; }
@@ -179,7 +214,7 @@
 
         .download-btn {
             width: 100%;
-            padding: 12px 10px; /* Увеличил padding, чтобы текст не входил в края */
+            padding: 12px 10px;
             border-radius: 12px;
             font-size: 11px;
             font-weight: 700;
@@ -292,6 +327,12 @@
     </style>
 </head>
 <body>
+
+    <div id="mobile-stub">
+        <div style="font-size: 50px; margin-bottom: 20px;">Sorry</div>
+        <h1>Mobile version is under development</h1>
+        <p>Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
+    </div>
 
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
 
@@ -496,6 +537,20 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
+
+        // Mobile check logic
+        function checkDevice() {
+            const stub = document.getElementById('mobile-stub');
+            if (window.innerWidth <= 768) {
+                stub.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                stub.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        window.addEventListener('resize', checkDevice);
+        window.addEventListener('load', checkDevice);
     </script>
 </body>
 </html>
