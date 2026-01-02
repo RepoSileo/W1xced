@@ -140,15 +140,15 @@
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             text-align: left;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: visible; 
-            text-decoration: none; /* Убирает подчеркивание */
-            color: inherit; /* Предотвращает фиолетовый цвет ссылок */
+            overflow: hidden; 
+            text-decoration: none;
+            color: inherit;
         }
 
         .card-content { padding: 20px 24px; }
-        .card:hover { transform: scale(1.01); border-color: rgba(255, 255, 255, 0.2); }
+        .card:hover { transform: scale(1.01); border-color: rgba(255, 255, 255, 0.2); overflow: visible; }
 
         .stats-panel {
             max-height: 0;
@@ -156,7 +156,7 @@
             background: rgba(128, 128, 128, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 24px;
-            overflow: visible; 
+            overflow: hidden;
         }
 
         .card:hover .stats-panel {
@@ -164,6 +164,7 @@
             opacity: 1;
             padding: 16px 24px;
             border-top: 1px solid var(--glass-border);
+            overflow: visible; /* Позволяет dropdown выходить за границы */
         }
 
         .stat-item { display: flex; justify-content: space-between; margin: 6px 0; }
@@ -178,7 +179,7 @@
 
         .download-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px 10px; /* Увеличил padding, чтобы текст не входил в края */
             border-radius: 12px;
             font-size: 11px;
             font-weight: 700;
@@ -186,39 +187,38 @@
             color: #fff;
             border: none;
             cursor: pointer;
+            display: block;
+            text-align: center;
         }
 
         .dropdown-menu {
             position: absolute;
             bottom: calc(100% + 12px);
             left: 0;
-            width: 200px; 
-            background: rgba(25, 25, 25, 0.6);
-            backdrop-filter: blur(30px) saturate(200%) brightness(100%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(100%);
+            width: 220px; 
+            background: rgba(25, 25, 25, 0.85);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             display: none;
             flex-direction: column;
-            padding: 6px; 
+            padding: 8px; 
             z-index: 10000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transform: translateZ(0);
-            -webkit-font-smoothing: antialiased;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .dropdown-item {
-            padding: 8px 12px;
+            padding: 10px 12px;
             color: rgba(255, 255, 255, 0.95);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             border-radius: 10px; 
-            transition: background 0.15s ease, color 0.1s ease;
+            transition: background 0.15s ease;
             display: flex;
             flex-direction: column;
             gap: 2px;
-            border: none; 
         }
 
         .dropdown-item:hover {
@@ -229,27 +229,20 @@
         .dropdown-item span {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.5);
-            transition: color 0.1s ease;
         }
 
         .dropdown-item:hover span {
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Светлая тема */
         body.light-mode .dropdown-menu {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        body.light-mode .dropdown-item {
-            color: #000;
-        }
-
-        body.light-mode .dropdown-item span {
-            color: rgba(0, 0, 0, 0.4);
-        }
+        body.light-mode .dropdown-item { color: #000; }
+        body.light-mode .dropdown-item span { color: rgba(0, 0, 0, 0.4); }
 
         .changelog-btn {
             flex: 1;
