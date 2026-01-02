@@ -11,6 +11,7 @@
             --glass-border: rgba(255, 255, 255, 0.12);
             --accent: #007AFF;
             --accent-green: #30D158;
+            --accent-orange: #FF9F0A;
             --text-main: #ffffff;
             --text-sec: #8E8E93;
         }
@@ -19,7 +20,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
         }
 
         body {
@@ -37,7 +38,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            filter: blur(120px);
+            filter: blur(100px);
             opacity: 0.4;
         }
 
@@ -46,37 +47,44 @@
             width: 500px; height: 500px;
             background: linear-gradient(135deg, var(--accent), #5856D6);
             border-radius: 50%;
-            top: 10%; left: -10%;
-            animation: float 18s infinite alternate ease-in-out;
+            top: 10%; left: -5%;
+            animation: move 20s infinite alternate;
         }
 
-        @keyframes float {
+        @keyframes move {
             from { transform: translate(0, 0); }
-            to { transform: translate(100px, 50px); }
+            to { transform: translate(120px, 80px); }
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             text-align: center;
             z-index: 1;
         }
 
-        /* Logo / Avatar */
-        .avatar-container {
+        .avatar-box {
             width: 120px;
             height: 120px;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
+            background: #1c1c1e;
+            border-radius: 35px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             position: relative;
         }
 
-        .avatar-img {
+        .avatar-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 34px; /* Apple Squircle */
-            border: 1px solid var(--glass-border);
-            background: #1c1c1e;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; }
@@ -91,77 +99,87 @@
 
         .highlight { color: var(--accent); font-weight: 600; }
 
-        /* Unified Card Style */
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Base Card */
         .card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 20px 24px;
-            margin-bottom: 12px;
             text-align: left;
-            transition: all 0.2s ease;
             text-decoration: none;
             display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden; /* Важно для выезжающей панели */
+        }
+
+        .card-content {
+            padding: 20px 24px;
+            z-index: 2;
+            position: relative;
+            background: transparent;
         }
 
         .card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: scale(1.02);
+            transform: scale(1.01);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .card-title {
-            color: var(--text-main);
-            font-size: 18px;
-            font-weight: 600;
+        /* --- Stats Panel (Bottom Slide) --- */
+        .stats-panel {
+            max-height: 0;
+            opacity: 0;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 24px;
+            border-top: 1px solid transparent;
+        }
+
+        .project-with-stats:hover .stats-panel {
+            max-height: 200px; /* Достаточно для контента */
+            opacity: 1;
+            padding: 16px 24px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .stat-item { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
+        .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
+
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 4px;
         }
 
-        .card-desc {
-            color: var(--text-sec);
-            font-size: 14px;
-            margin-top: 6px;
-        }
+        .card-title { color: #fff; font-size: 18px; font-weight: 600; }
+        .card-desc { color: var(--text-sec); font-size: 14px; }
 
-        .badge {
-            font-size: 10px;
-            padding: 3px 10px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
-            font-weight: 700;
-        }
+        /* Badges */
+        .badge { font-size: 10px; padding: 3px 10px; border-radius: 8px; font-weight: 700; text-transform: uppercase; }
+        .badge.blue { background: rgba(0, 122, 255, 0.25); color: var(--accent); }
+        .badge.green { background: rgba(48, 209, 88, 0.15); color: var(--accent-green); }
+        .badge.orange { background: rgba(255, 159, 10, 0.15); color: var(--accent-orange); }
 
-        /* Countdown */
+        /* Release Countdown */
         .release-box {
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 24px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px dashed var(--glass-border);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 25px 0;
         }
 
-        .release-label {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .countdown-timer {
-            font-family: "SF Mono", monospace;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
+        .release-label { font-size: 11px; font-weight: 800; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .countdown-timer { display: flex; justify-content: center; gap: 15px; font-family: "SF Mono", monospace; font-size: 20px; }
         .unit { display: flex; flex-direction: column; font-weight: 600; }
         .u-label { font-size: 9px; color: var(--text-sec); text-transform: uppercase; margin-top: 4px; }
 
@@ -174,8 +192,9 @@
     <div class="liquid-bg"><div class="blob"></div></div>
 
     <div class="container">
-        <div class="avatar-container">
-            <img src="Logo.jpg" alt="W1xced" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=W&background=1c1c1e&color=fff'">
+        <div class="avatar-box">
+            <img src="Logo.jpg" id="mainLogo" alt="W1xced" onerror="this.style.display='none'; document.getElementById('fallback').style.zIndex='1';">
+            <div id="fallback" style="position: absolute; font-size: 50px; font-weight: 700; color: #3A3A3C; z-index: -1;">W</div>
         </div>
         
         <h1>W1xced</h1>
@@ -183,37 +202,68 @@
         
         <p class="bio-text">
             Specialized in <span class="highlight">Lua Development</span> & <span class="highlight">Reverse Engineering</span>.<br>
-            Focusing on high-end software solutions and system customization.
+            Focusing on high-end software solutions and customization.
         </p>
 
         <div class="projects">
-            <a href="#" class="card">
-                <div class="card-title">LIBDock <span class="badge" style="color:var(--accent-green)">LIVE</span></div>
-                <div class="card-desc">Advanced macOS-style customization framework for Windows.</div>
-            </a>
-
-            <a href="#" class="card">
-                <div class="card-title">ACCautoCracker <span class="badge" style="color:#FF9F0A">PRIVATE</span></div>
-                <div class="card-desc">Professional automated game analysis and unlocking tool.</div>
-            </a>
-
-            <a href="#" class="card">
-                <div class="card-title">MyDockFinder <span class="badge">CRACKED</span></div>
-                <div class="card-desc">YaY Crack MyDockFinder.</div>
-            </a>
-
-            <a href="https://t.me/LIBDock" class="card" style="margin-top: 20px; border-color: rgba(0, 122, 255, 0.3);">
-                <div class="card-title">
-                    Join Telegram
-                    <span style="color: var(--accent);">→</span>
+            <div class="card project-with-stats">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-title">LIBDock</span>
+                        <span class="badge green">Live</span>
+                    </div>
+                    <div class="card-desc">Advanced macOS-style framework for Windows.</div>
                 </div>
-                <div class="card-desc">Get the latest updates on @LIBDock channel.</div>
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <span class="stat-label">Project Start</span>
+                        <span class="stat-value">April 13, 2025</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Icons</span>
+                        <span class="stat-value">1200+ Units</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Created By</span>
+                        <span class="stat-value">W1xced & 127.0.0.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-title">ACCautoCracker</span>
+                        <span class="badge orange">Private</span>
+                    </div>
+                    <div class="card-desc">Professional automated game cracking tool.</div>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-title">MyDockFinder</span>
+                        <span class="badge blue">Cracked</span>
+                    </div>
+                    <div class="card-desc">YaY Crack MyDockFinder</div>
+                </div>
+            </a>
+
+            <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4);">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-title">Join Telegram Channel</span>
+                        <span style="color: var(--accent);">→</span>
+                    </div>
+                    <div class="card-desc">Get the latest updates on @LIBDock channel.</div>
+                </div>
             </a>
         </div>
 
         <div class="release-box">
-            <div class="release-label">Release 2.0</div>
-            <div class="countdown-timer" id="timer">
+            <div class="release-label">Release 2.0 Countdown</div>
+            <div class="countdown-timer">
                 <div class="unit"><span id="d">00</span><span class="u-label">days</span></div>
                 <div class="unit"><span id="h">00</span><span class="u-label">hrs</span></div>
                 <div class="unit"><span id="m">00</span><span class="u-label">min</span></div>
@@ -221,7 +271,7 @@
             </div>
         </div>
 
-        <div class="footer">DESIGNED IN CALIFORNIA • 2026</div>
+        <div class="footer">By W1xced • 2026</div>
     </div>
 
     <script>
@@ -229,14 +279,11 @@
             const target = new Date('January 1, 2027 00:00:00').getTime();
             const now = new Date().getTime();
             const diff = target - now;
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            document.getElementById('d').innerText = d;
-            document.getElementById('h').innerText = h < 10 ? '0'+h : h;
-            document.getElementById('m').innerText = m < 10 ? '0'+m : m;
-            document.getElementById('s').innerText = s < 10 ? '0'+s : s;
+            
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
         setInterval(updateTimer, 1000);
         updateTimer();
