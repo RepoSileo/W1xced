@@ -105,7 +105,6 @@
             gap: 12px;
         }
 
-        /* Base Card */
         .card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
@@ -117,14 +116,13 @@
             display: block;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden; /* Важно для выезжающей панели */
+            overflow: hidden;
         }
 
         .card-content {
             padding: 20px 24px;
             z-index: 2;
             position: relative;
-            background: transparent;
         }
 
         .card:hover {
@@ -132,7 +130,7 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- Stats Panel (Bottom Slide) --- */
+        /* --- Stats Panel Style --- */
         .stats-panel {
             max-height: 0;
             opacity: 0;
@@ -142,8 +140,8 @@
             border-top: 1px solid transparent;
         }
 
-        .project-with-stats:hover .stats-panel {
-            max-height: 200px; /* Достаточно для контента */
+        .card:hover .stats-panel {
+            max-height: 300px;
             opacity: 1;
             padding: 16px 24px;
             border-top: 1px solid var(--glass-border);
@@ -152,6 +150,23 @@
         .stat-item { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
         .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
+
+        /* --- Download Button Style --- */
+        .download-btn {
+            display: block;
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: opacity 0.2s;
+        }
+
+        .download-btn:hover { opacity: 0.9; }
 
         .card-header {
             display: flex;
@@ -163,13 +178,11 @@
         .card-title { color: #fff; font-size: 18px; font-weight: 600; }
         .card-desc { color: var(--text-sec); font-size: 14px; }
 
-        /* Badges */
         .badge { font-size: 10px; padding: 3px 10px; border-radius: 8px; font-weight: 700; text-transform: uppercase; }
         .badge.blue { background: rgba(0, 122, 255, 0.25); color: var(--accent); }
         .badge.green { background: rgba(48, 209, 88, 0.15); color: var(--accent-green); }
         .badge.orange { background: rgba(255, 159, 10, 0.15); color: var(--accent-orange); }
 
-        /* Release Countdown */
         .release-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px dashed var(--glass-border);
@@ -206,7 +219,7 @@
         </p>
 
         <div class="projects">
-            <div class="card project-with-stats">
+            <div class="card">
                 <div class="card-content">
                     <div class="card-header">
                         <span class="card-title">LIBDock</span>
@@ -215,18 +228,9 @@
                     <div class="card-desc">Advanced macOS-style framework for Windows.</div>
                 </div>
                 <div class="stats-panel">
-                    <div class="stat-item">
-                        <span class="stat-label">Project Start</span>
-                        <span class="stat-value">April 13, 2025</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Icons</span>
-                        <span class="stat-value">1200+ Units</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Created By</span>
-                        <span class="stat-value">W1xced & 127.0.0.0</span>
-                    </div>
+                    <div class="stat-item"><span class="stat-label">Project Start</span><span class="stat-value">April 13, 2025</span></div>
+                    <div class="stat-item"><span class="stat-label">Icons</span><span class="stat-value">1200+ Units</span></div>
+                    <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                 </div>
             </div>
 
@@ -240,15 +244,21 @@
                 </div>
             </a>
 
-            <a href="#" class="card">
+            <div class="card">
                 <div class="card-content">
                     <div class="card-header">
                         <span class="card-title">MyDockFinder</span>
                         <span class="badge blue">Cracked</span>
                     </div>
-                    <div class="card-desc">YaY Crack MyDockFinder</div>
+                    <div class="card-desc">YaY Cralc MyDockFinder.</div>
                 </div>
-            </a>
+                <div class="stats-panel">
+                    <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
+                    <div class="stat-item"><span class="stat-label">Bypass</span><span class="stat-value">Personal</span></div>
+                    <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
+                    <a href="https://download1349.mediafire.com/jm23e97hpkeg6n4QApwhUQ5OX_QBjaoD1o7YJt5coZiMQRLbbwoaxBV4KdgfXUQvkvIokmW7mtK2kF0ugglU1NMZjVcw7JlPpkWKjyqVHFJftKmTDk_Foj6lUIJro_JQOBMCilfFtOIEVb-UP4MvbSVWvBKnK2uXOK2LH8U7LpQ/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn">Download ZIP</a>
+                </div>
+            </div>
 
             <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4);">
                 <div class="card-content">
@@ -271,7 +281,7 @@
             </div>
         </div>
 
-        <div class="footer">By W1xced • 2026</div>
+        <div class="footer">DESIGNED IN CALIFORNIA • 2026</div>
     </div>
 
     <script>
