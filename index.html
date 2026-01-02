@@ -72,7 +72,7 @@
             font-weight: 700;
         }
 
-        /* --- MOBILE STUB STYLE --- */
+        /* --- NEW MOBILE STUB STYLE --- */
         #mobile-stub {
             display: none;
             position: fixed;
@@ -80,18 +80,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: var(--bg-color);
             z-index: 99999;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            color: #ffffff;
+            padding: 30px;
+            overflow: hidden;
         }
 
-        #mobile-stub h1 { font-size: 24px; margin-bottom: 15px; color: var(--accent); }
-        #mobile-stub p { font-size: 16px; color: var(--text-sec); line-height: 1.5; }
+        .stub-content {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            padding: 40px 25px;
+            border-radius: 35px;
+            max-width: 320px;
+            z-index: 2;
+        }
+
+        #mobile-stub h1 { 
+            font-size: 22px; 
+            margin-bottom: 15px; 
+            color: var(--text-main); 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        #mobile-stub p { 
+            font-size: 14px; 
+            color: var(--text-sec); 
+            line-height: 1.6;
+        }
+
+        .stub-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 15px var(--accent));
+        }
 
         @media (max-width: 768px) {
             body { overflow: hidden; }
@@ -335,9 +363,15 @@
 <body>
 
     <div id="mobile-stub">
-        <div style="font-size: 50px; margin-bottom: 20px;">📱</div>
-        <h1 id="lang-mob-title">Mobile version is under development</h1>
-        <p id="lang-mob-desc">Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
+        <div class="liquid-bg">
+            <div class="blob"></div>
+            <div class="blob-right"></div>
+        </div>
+        <div class="stub-content">
+            <span class="stub-icon">Sorry</span>
+            <h1 id="lang-mob-title">Mobile version is under development</h1>
+            <p id="lang-mob-desc">Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
+        </div>
     </div>
 
     <div class="controls-top">
