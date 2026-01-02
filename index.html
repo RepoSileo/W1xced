@@ -207,7 +207,7 @@
         .stat-label { font-size: 10px; color: var(--text-sec); text-transform: uppercase; }
         .stat-value { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-        /* --- DOWNLOAD BUTTONS (COMPACT) --- */
+        /* --- DOWNLOAD BUTTONS --- */
         .download-wrapper {
             position: relative;
             flex: 1;
@@ -349,7 +349,7 @@
             text-transform: uppercase;
         }
 
-        /* --- HARDWARE SPECS --- */
+        /* --- HARDWARE SPECS (WORKSTATIONS) --- */
         .specs-card {
             background: var(--glass);
             backdrop-filter: blur(25px) saturate(180%);
@@ -357,7 +357,6 @@
             border-radius: 24px;
             margin-top: 12px;
             padding: 24px;
-            text-align: left;
         }
         .specs-grid {
             display: grid;
@@ -373,19 +372,19 @@
         .device-icon {
             width: 60px;
             height: 60px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             object-fit: contain;
         }
         .device-name {
             font-size: 13px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--text-main);
         }
         .spec-line {
             font-size: 10px;
             color: var(--text-sec);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             width: 100%;
         }
         .spec-line b { color: var(--text-main); font-weight: 600; }
@@ -559,7 +558,7 @@
                     <p class="spec-line" style="font-size: 9px; margin-top: 5px; opacity: 0.8;">macOS Sequoia 15.7.3</p>
                 </div>
                 <div class="device-info" style="border-left: 1px solid var(--glass-border); padding-left: 15px;">
-                    <div style="font-size: 40px; margin-bottom: 12px;">🖥️</div>
+                    <img src="LogoWindows.png" alt="Windows" class="device-icon" onerror="this.style.display='none';">
                     <p class="device-name">Windows PC</p>
                     <p class="spec-line">CPU <b>i9 14900k</b></p>
                     <p class="spec-line">Memory <b>32GB</b></p>
