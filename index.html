@@ -45,6 +45,33 @@
             overflow-x: hidden;
         }
 
+        /* --- UI CONTROLS --- */
+        .controls-top {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .ui-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
         /* --- MOBILE STUB STYLE --- */
         #mobile-stub {
             display: none;
@@ -69,25 +96,6 @@
         @media (max-width: 768px) {
             body { overflow: hidden; }
             #mobile-stub { display: flex; }
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
         }
 
         /* --- BACKGROUND BLUR EFFECTS --- */
@@ -152,7 +160,6 @@
 
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ТИПИЗАЦИЯ НИКНЕЙМА */
         h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; min-height: 38px; }
         .cursor {
             display: inline-block;
@@ -162,9 +169,7 @@
             animation: blink 1s infinite;
             vertical-align: middle;
         }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
         .nickname { color: var(--text-sec); font-size: 16px; margin-bottom: 20px; }
         .bio-text { color: var(--text-sec); font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
@@ -330,11 +335,14 @@
 
     <div id="mobile-stub">
         <div style="font-size: 50px; margin-bottom: 20px;">📱</div>
-        <h1>Mobile version is under development</h1>
-        <p>Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
+        <h1 id="lang-mob-title">Mobile version is under development</h1>
+        <p id="lang-mob-desc">Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.</p>
     </div>
 
-    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+    <div class="controls-top">
+        <button class="ui-btn" id="langToggle" onclick="toggleLang()">EN</button>
+        <button class="ui-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+    </div>
 
     <div class="liquid-bg">
         <div class="blob"></div>
@@ -344,42 +352,14 @@
     <div class="modal-overlay" id="changelogModal">
         <div class="modal-content">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h2 style="font-size:22px;">Change Log</h2>
+                <h2 id="lang-modal-title" style="font-size:22px;">Change Log</h2>
                 <button onclick="closeModal()" style="background:none; border:none; color:var(--text-main); font-size:28px; cursor:pointer;">&times;</button>
             </div>
-            
             <span style="color: var(--accent); font-weight: 700; font-size: 14px;">📅 1 January 2026</span>
             <span style="font-size: 20px; font-weight: 800; margin: 8px 0 15px; display: block;">v1.7 Release</span>
-            
-            <div style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px;">
-                <strong>Totally added from Beta/Alpha/dev:</strong><br>
-                • Add - 200+ icons<br>
-                • Add - Test MacOS 26 Icons<br>
-                • Add - MyDockFinder (Last Build)<br>
-                • Add - MacOS 26 Cursor
-            </div>
-            
-            <hr style="height: 1px; background: var(--glass-border); border: none; margin-bottom: 20px;">
-            
-            <div style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 20px;">
-                <strong style="color: var(--accent);">What's new add Released?</strong><br>
-                • Add - 90+ icons (MacOS 26)<br>
-                • Add - 40+ icons (MacOS 15)<br>
-                • Add - MacOS 15 Cursor<br>
-                • Add - Management - Documentation about LIBDock<br>
-                • Add - Screenshot for check Design apps in LIBDock/apps<br>
-                • Add - Support Russia Language For ReadMe/Management<br>
-                • Add - Seelen UI v2.4.11 (Apps)<br>
-                • Add - Rainmeter (Apps + theme)<br>
-                • Add - Windhawk (Apps)
-            </div>
-
-            <div style="font-size: 11px; color: var(--text-sec); margin-bottom: 25px;">
-                <strong>Builds:</strong><br>
-                v1.7 (1 Jan 2025) | Beta 3 | Alpha 3 | Dev
-            </div>
-            
-            <button class="download-btn" onclick="closeModal()" style="padding: 12px;">Close</button>
+            <div id="lang-modal-body" style="font-size: 13px; line-height: 1.7; color: var(--text-sec); margin-bottom: 25px;">
+                </div>
+            <button class="download-btn" id="lang-modal-close" onclick="closeModal()" style="padding: 12px;">Close</button>
         </div>
     </div>
 
@@ -392,7 +372,7 @@
         <h1 id="typing-nick"></h1>
         <p class="nickname">Open-Core-W1xced</p>
         
-        <p class="bio-text">
+        <p class="bio-text" id="lang-bio">
             Specialized in <span class="highlight">Lua Development</span> & <span class="highlight">Reverse Engineering</span>.<br>
             Focusing on high-end software solutions and customization.
         </p>
@@ -402,33 +382,25 @@
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:18px; font-weight:600;">LIBDock</span>
-                        <span class="badge green">Worked</span>
+                        <span class="badge green" id="lang-status-worked">Worked</span>
                     </div>
-                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Advanced macOS-style for Windows.</p>
+                    <p id="lang-libdock-desc" style="font-size:14px; color:var(--text-sec); margin-top:4px;">Advanced macOS-style for Windows.</p>
                 </div>
-                
                 <div class="stats-panel">
-                    <div class="stat-item"><span class="stat-label">Project Start</span><span class="stat-value">April 13, 2025</span></div>
-                    <div class="stat-item"><span class="stat-label">Version</span><span class="stat-value">v1.7 Release</span></div>
-                    <div class="stat-item"><span class="stat-label">Icons</span><span class="stat-value">1200+ Units</span></div>
-                    <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
-                    
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-start">Project Start</span><span class="stat-value">April 13, 2025</span></div>
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-ver">Version</span><span class="stat-value">v1.7 Release</span></div>
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-icons">Icons</span><span class="stat-value">1200+ Units</span></div>
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-by">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                     <div style="display:flex; gap:8px; margin-top:16px; position:relative;">
                         <div class="download-wrapper">
-                            <button class="download-btn" onclick="toggleDropdown(event)">Download ZIP</button>
+                            <button class="download-btn" id="lang-dl-zip" onclick="toggleDropdown(event)">Download ZIP</button>
                             <div class="dropdown-menu" id="libdockMenu">
-                                <a href="https://download1655.mediafire.com/15d3sdrmfu4g00hmM_1ss16gZTuhPZsLXbjL26EqiBVPmYf3pUZvL6AW9LqpXqakXdroceM5MYSSftCnZpKt1GWgPQznVFqCiW_r2P9Cc4yxQnEU8eBpSRM0PTwfwO_j4XZadiCl1ZAL-5kdS9DlL56yyT-5D69PfYLRBNQ8_Ts/ler7e3s1bjkq5ep/LIBDock.zip" class="dropdown-item">
-                                    Release <span>1.7 Released (Recommended)</span>
-                                </a>
-                                <a href="https://download1078.mediafire.com/hj86yg5pc8og3_b1CyAW_xCQQFrh45kG54Mn7Xs73FoBnoEdMXdTqz37oyQLcBANWZhVkhuI8xULPcMKt4LWsRFB8y3-1Zsg9Fcxsk4YbUWPLreUNfWdocZ5adTOOANO-jeoE-vFOJikq60d6Lv1Boy_tXvxv9djtAbU18Cf6Qs/9dse9bgej78cjqt/LIBDock.zip" class="dropdown-item">
-                                    Beta <span>1.7 Alpha 3 (Last)</span>
-                                </a>
-                                <a href="https://download853.mediafire.com/llp8cpyzhbxgush8dzqqX7zCKYKnwbM7xSNxNUz8ZecWiS-TKOOhofJjFg_4F-tYQmoWa7HaKefDC-8lp5hyW2T99-e1ULdkLfyEedy1yiI1BfyeDeDR7wtAVsVXx8EA2obUSeP78KBC6q_ki7ILct63xtNqRmwvKm-InVyRwdo/ujr7gtur4voe71z/LIBDock.zip" class="dropdown-item">
-                                    Alpha <span>1.7 Beta 3 (Last)</span>
-                                </a>
+                                <a href="https://download1655.mediafire.com/..." class="dropdown-item">Release <span id="lang-dl-rec">1.7 Released (Recommended)</span></a>
+                                <a href="https://download1078.mediafire.com/..." class="dropdown-item">Beta <span>1.7 Alpha 3</span></a>
+                                <a href="https://download853.mediafire.com/..." class="dropdown-item">Alpha <span>1.7 Beta 3</span></a>
                             </div>
                         </div>
-                        <button class="changelog-btn" onclick="openModal()">Change Log</button>
+                        <button class="changelog-btn" id="lang-cl-btn" onclick="openModal()">Change Log</button>
                     </div>
                 </div>
             </div>
@@ -437,15 +409,14 @@
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:18px; font-weight:600;">MyDockFinder</span>
-                        <span class="badge blue">Cracked</span>
+                        <span class="badge blue" id="lang-status-cracked">Cracked</span>
                     </div>
-                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">YaY Crack MyDockFinder.</p>
+                    <p id="lang-mdf-desc" style="font-size:14px; color:var(--text-sec); margin-top:4px;">YaY Crack MyDockFinder.</p>
                 </div>
                 <div class="stats-panel">
-                    <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
-                    <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Working</span></div>
-                    <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
-                    <a href="https://download1349.mediafire.com/v1rj5cduhzugDN6RZELkyJFT4nXyWvQJ_5nuPsfZR7FSSGPcM0b1gHLOeUbwfkJgiToauaoqDV6gCskyZb0ZQ7R01sje6AB3FRN7nNncr_gWxdxACneCkGMpJMxspjwV5F30WIscYXcY9akeZuHlALULMZcuZz-5fDbU72rYJd8/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-rel">Released</span><span class="stat-value">December 13</span></div>
+                    <div class="stat-item"><span class="stat-label" id="lang-stat-status">Status</span><span class="stat-value">Working</span></div>
+                    <a href="https://download1349.mediafire.com/..." class="download-btn" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
                 </div>
             </div>
 
@@ -453,103 +424,187 @@
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:18px; font-weight:600;">ACCautoCracker</span>
-                        <span class="badge orange">Private</span>
+                        <span class="badge orange" id="lang-status-priv">Private</span>
                     </div>
-                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Professional automated game cracking tool.</p>
+                    <p id="lang-acc-desc" style="font-size:14px; color:var(--text-sec); margin-top:4px;">Professional automated game cracking tool.</p>
                 </div>
             </div>
 
             <a href="https://t.me/LIBDock" class="card" style="border-color: rgba(0, 122, 255, 0.4); margin-top: 12px;">
                 <div class="card-content">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size:18px; font-weight:600;">Join Telegram Channel</span>
+                        <span id="lang-tg-join" style="font-size:18px; font-weight:600;">Join Telegram Channel</span>
                         <span style="color: var(--accent);">→</span>
                     </div>
-                    <p style="font-size:14px; color:var(--text-sec); margin-top:4px;">Get the latest updates on @LIBDock channel.</p>
+                    <p id="lang-tg-desc" style="font-size:14px; color:var(--text-sec); margin-top:4px;">Get the latest updates on @LIBDock channel.</p>
                 </div>
             </a>
         </div>
 
         <div class="release-box">
-            <p class="release-box-title">COUNTDOWN 2027 YEARS</p>
+            <p class="release-box-title" id="lang-timer-title">COUNTDOWN 2027 YEARS</p>
             <div class="countdown-timer">
-                <div class="timer-unit"><span id="d">00</span><small>DAYS</small></div>
-                <div class="timer-unit"><span id="h">00</span><small>HRS</small></div>
-                <div class="timer-unit"><span id="m">00</span><small>MIN</small></div>
-                <div class="timer-unit"><span id="s">00</span><small>SEC</small></div>
+                <div class="timer-unit"><span id="d">00</span><small id="lang-t-d">DAYS</small></div>
+                <div class="timer-unit"><span id="h">00</span><small id="lang-t-h">HRS</small></div>
+                <div class="timer-unit"><span id="m">00</span><small id="lang-t-m">MIN</small></div>
+                <div class="timer-unit"><span id="s">00</span><small id="lang-t-s">SEC</small></div>
             </div>
         </div>
 
         <div class="specs-card">
-            <p style="font-size: 10px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; letter-spacing: 1.5px;">MY WORKSTATIONS</p>
+            <p id="lang-specs-title" style="font-size: 10px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; letter-spacing: 1.5px;">MY WORKSTATIONS</p>
             <div class="specs-grid">
                 <div class="device-info">
                     <img src="LogoMacBook.png" alt="MacBook" class="device-icon" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';">
                     <p class="device-name">MacBook Pro</p>
-                    <p class="spec-line">Chip <b>M2</b></p>
-                    <p class="spec-line">Memory <b>32GB</b></p>
-                    <p class="spec-line">Disk <b>MacOS</b></p>
-                    <p class="spec-line" style="font-size: 9px; margin-top: 5px; opacity: 0.8;">macOS Sequoia 15.7.3</p>
+                    <p class="spec-line"><span id="lang-chip">Chip</span> <b>M2</b></p>
+                    <p class="spec-line"><span id="lang-mem1">Memory</span> <b>32GB</b></p>
+                    <p class="spec-line"><span id="lang-disk">Disk</span> <b>MacOS</b></p>
                 </div>
                 <div class="device-info" style="border-left: 1px solid var(--glass-border); padding-left: 15px;">
-                    <img src="LogoWindows_dark.png" id="winIcon" alt="Windows" class="device-icon" onerror="this.style.display='none';">
+                    <img src="LogoWindows_dark.png" id="winIcon" alt="Windows" class="device-icon">
                     <p class="device-name">Windows PC</p>
                     <p class="spec-line">CPU <b>i9 14900k</b></p>
-                    <p class="spec-line">Memory <b>32GB</b></p>
+                    <p class="spec-line"><span id="lang-mem2">Memory</span> <b>32GB</b></p>
                     <p class="spec-line">VRAM <b>8GB</b></p>
-                    <p class="spec-line" style="font-size: 9px; margin-top: 5px; opacity: 0.8;">Windows 11 Pro</p>
                 </div>
             </div>
         </div>
 
-        <div class="footer">Site By W1xced • 2026</div>
+        <div class="footer" id="lang-footer">Site By W1xced • 2026</div>
     </div>
 
     <script>
         
+        const translations = {
+            en: {
+                mobTitle: "Mobile version is under development",
+                mobDesc: "Please visit this site from a desktop computer <br> to get full access to LIBDock and other tools.",
+                bio: 'Specialized in <span class="highlight">Lua Development</span> & <span class="highlight">Reverse Engineering</span>.<br>Focusing on high-end software solutions and customization.',
+                statusWorked: "Worked", statusCracked: "Cracked", statusPriv: "Private",
+                libDesc: "Advanced macOS-style for Windows.",
+                statStart: "Project Start", statVer: "Version", statIcons: "Icons", statBy: "Created By", statRel: "Released", statStatus: "Status",
+                dlZip: "Download ZIP", dlRec: "1.7 Released (Recommended)", clBtn: "Change Log",
+                mdfDesc: "YaY Crack MyDockFinder.", accDesc: "Professional automated game cracking tool.",
+                tgJoin: "Join Telegram Channel", tgDesc: "Get the latest updates on @LIBDock channel.",
+                timerTitle: "COUNTDOWN 2027 YEARS", tD: "DAYS", tH: "HRS", tM: "MIN", tS: "SEC",
+                specsTitle: "MY WORKSTATIONS", chip: "Chip", mem: "Memory", disk: "Disk",
+                footer: "Site By W1xced • 2026",
+                modalTitle: "Change Log", modalClose: "Close",
+                modalBody: `<strong>Totally added from Beta/Alpha/dev:</strong><br>• Add - 200+ icons<br>• Add - Test MacOS 26 Icons<br>• Add - MyDockFinder (Last Build)<br>• Add - MacOS 26 Cursor<br><br><strong style="color: var(--accent);">What's new add Released?</strong><br>• Add - 90+ icons (MacOS 26)<br>• Add - 40+ icons (MacOS 15)<br>• Add - Support Russia Language For ReadMe/Management`
+            },
+            ru: {
+                mobTitle: "Мобильная версия в разработке",
+                mobDesc: "Пожалуйста, посетите сайт с компьютера <br> для полного доступа к LIBDock и инструментам.",
+                bio: 'Специализируюсь на <span class="highlight">Lua Разработке</span> и <span class="highlight">Реверс-инжиниринге</span>.<br>Создаю софт и решения для кастомизации систем.',
+                statusWorked: "В работе", statusCracked: "Взломано", statusPriv: "Приватно",
+                libDesc: "Продвинутый macOS-стиль для Windows.",
+                statStart: "Старт проекта", statVer: "Версия", statIcons: "Иконки", statBy: "Авторы", statRel: "Релиз", statStatus: "Статус",
+                dlZip: "Скачать ZIP", dlRec: "1.7 Релиз (Рекомендуется)", clBtn: "Чейнджлог",
+                mdfDesc: "Ура, взломали MyDockFinder.", accDesc: "Профессиональный инструмент для авто-кряка игр.",
+                tgJoin: "Telegram Канал", tgDesc: "Свежие обновления в канале @LIBDock.",
+                timerTitle: "ОТСЧЕТ ДО 2027 ГОДА", tD: "ДНЕЙ", tH: "ЧАС", tM: "МИН", tS: "СЕК",
+                specsTitle: "МОИ РАБОЧИЕ СТАНЦИИ", chip: "Чип", mem: "Память", disk: "Диск",
+                footer: "Сайт от W1xced • 2026",
+                modalTitle: "Список изменений", modalClose: "Закрыть",
+                modalBody: `<strong>Добавлено из Beta/Alpha/dev:</strong><br>• Добавлено - 200+ иконок<br>• Добавлено - Тест MacOS 26 иконок<br>• Добавлено - MyDockFinder (Last Build)<br>• Добавлено - Курсор MacOS 26<br><br><strong style="color: var(--accent);">Что нового в релизе?</strong><br>• Добавлено - 90+ иконок (MacOS 26)<br>• Добавлено - 40+ иконок (MacOS 15)<br>• Добавлено - Поддержка русского языка для документации`
+            },
+            ua: {
+                mobTitle: "Мобільна версія у розробці",
+                mobDesc: "Будь ласка, зайдіть з комп'ютера <br> для повного доступу до LIBDock та інструментів.",
+                bio: 'Спеціалізуюсь на <span class="highlight">Lua Розробці</span> та <span class="highlight">Реверс-інжинірингу</span>.<br>Створюю софт та рішення для кастомізації систем.',
+                statusWorked: "Працює", statusCracked: "Зламано", statusPriv: "Приватно",
+                libDesc: "Просунутий macOS-стиль для Windows.",
+                statStart: "Старт проєкту", statVer: "Версія", statIcons: "Іконки", statBy: "Автори", statRel: "Реліз", statStatus: "Статус",
+                dlZip: "Завантажити ZIP", dlRec: "1.7 Реліз (Рекомендовано)", clBtn: "Чейнджлог",
+                mdfDesc: "Ура, зламали MyDockFinder.", accDesc: "Професійний інструмент для авто-кряку ігор.",
+                tgJoin: "Telegram Канал", tgDesc: "Останні оновлення у каналі @LIBDock.",
+                timerTitle: "ВІДЛІК ДО 2027 РОКУ", tD: "ДНІВ", tH: "ГОД", tM: "ХВИЛ", tS: "СЕК",
+                specsTitle: "МОЇ РОБОЧІ СТАНЦІЇ", chip: "Чіп", mem: "Пам'ять", disk: "Диск",
+                footer: "Сайт від W1xced • 2026",
+                modalTitle: "Список змін", modalClose: "Закрити",
+                modalBody: `<strong>Додано з Beta/Alpha/dev:</strong><br>• Додано - 200+ іконок<br>• Додано - Тест MacOS 26 іконок<br>• Додано - MyDockFinder (Last Build)<br>• Додано - Курсор MacOS 26<br><br><strong style="color: var(--accent);">Що нового у релізі?</strong><br>• Додано - 90+ іконок (MacOS 26)<br>• Додано - 40+ іконок (MacOS 15)<br>• Додано - Підтримка української мови для документації`
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function applyLang() {
+            const l = translations[currentLang];
+            document.getElementById('langToggle').innerText = currentLang.toUpperCase();
+            document.getElementById('lang-mob-title').innerText = l.mobTitle;
+            document.getElementById('lang-mob-desc').innerHTML = l.mobDesc;
+            document.getElementById('lang-bio').innerHTML = l.bio;
+            document.getElementById('lang-status-worked').innerText = l.statusWorked;
+            document.getElementById('lang-status-cracked').innerText = l.statusCracked;
+            document.getElementById('lang-status-priv').innerText = l.statusPriv;
+            document.getElementById('lang-libdock-desc').innerText = l.libDesc;
+            document.getElementById('lang-stat-start').innerText = l.statStart;
+            document.getElementById('lang-stat-ver').innerText = l.statVer;
+            document.getElementById('lang-stat-icons').innerText = l.statIcons;
+            document.getElementById('lang-stat-by').innerText = l.statBy;
+            document.getElementById('lang-dl-zip').innerText = l.dlZip;
+            document.getElementById('lang-dl-rec').innerText = l.dlRec;
+            document.getElementById('lang-cl-btn').innerText = l.clBtn;
+            document.getElementById('lang-mdf-desc').innerText = l.mdfDesc;
+            document.getElementById('lang-stat-rel').innerText = l.statRel;
+            document.getElementById('lang-stat-status').innerText = l.statStatus;
+            document.getElementById('lang-acc-desc').innerText = l.accDesc;
+            document.getElementById('lang-tg-join').innerText = l.tgJoin;
+            document.getElementById('lang-tg-desc').innerText = l.tgDesc;
+            document.getElementById('lang-timer-title').innerText = l.timerTitle;
+            document.getElementById('lang-t-d').innerText = l.tD;
+            document.getElementById('lang-t-h').innerText = l.tH;
+            document.getElementById('lang-t-m').innerText = l.tM;
+            document.getElementById('lang-t-s').innerText = l.tS;
+            document.getElementById('lang-specs-title').innerText = l.specsTitle;
+            document.getElementById('lang-chip').innerText = l.chip;
+            document.getElementById('lang-mem1').innerText = l.mem;
+            document.getElementById('lang-mem2').innerText = l.mem;
+            document.getElementById('lang-disk').innerText = l.disk;
+            document.getElementById('lang-footer').innerText = l.footer;
+            document.getElementById('lang-modal-title').innerText = l.modalTitle;
+            document.getElementById('lang-modal-body').innerHTML = l.modalBody;
+            document.getElementById('lang-modal-close').innerText = l.modalClose;
+        }
+
+        function toggleLang() {
+            const order = ['en', 'ru', 'ua'];
+            let idx = order.indexOf(currentLang);
+            currentLang = order[(idx + 1) % order.length];
+            localStorage.setItem('lang', currentLang);
+            applyLang();
+        }
+
+        // --- ЭФФЕКТ ПЕЧАТИ ---
         const nickName = "W1xced";
         const typingElement = document.getElementById('typing-nick');
-        let index = 0;
-
+        let typeIdx = 0;
         function type() {
-            if (index < nickName.length) {
-                typingElement.innerHTML = nickName.slice(0, index + 1) + '<span class="cursor"></span>';
-                index++;
-                setTimeout(type, 150); 
+            if (typeIdx < nickName.length) {
+                typingElement.innerHTML = nickName.slice(0, typeIdx + 1) + '<span class="cursor"></span>';
+                typeIdx++;
+                setTimeout(type, 150);
             } else {
-                
                 typingElement.innerHTML = nickName + '<span class="cursor"></span>';
             }
         }
 
         
-        window.addEventListener('load', () => {
-            setTimeout(type, 500); 
-        });
-
         function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
             document.getElementById('themeToggle').innerText = isLight ? '🔆' : '🌙';
-
-            const winIcon = document.getElementById('winIcon');
-            if (isLight) {
-                winIcon.src = 'LogoWindows_light.png';
-            } else {
-                winIcon.src = 'LogoWindows_dark.png';
-            }
+            document.getElementById('winIcon').src = isLight ? 'LogoWindows_light.png' : 'LogoWindows_dark.png';
         }
 
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-            document.getElementById('themeToggle').innerText = '🔆';
-            document.getElementById('winIcon').src = 'LogoWindows_light.png';
-        } else {
-            document.getElementById('winIcon').src = 'LogoWindows_dark.png';
-        }
+        
+        window.addEventListener('load', () => {
+            applyLang();
+            setTimeout(type, 500);
+            if (localStorage.getItem('theme') === 'light') toggleTheme();
+        });
 
         function toggleDropdown(event) {
             event.stopPropagation();
@@ -563,19 +618,17 @@
         }
 
         window.onclick = function(event) { if (!event.target.matches('.download-btn')) hideDropdown(); }
-
         function openModal() { document.getElementById('changelogModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeModal() { document.getElementById('changelogModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
         function updateTimer() {
             const target = new Date('January 1, 2027 00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
+            const diff = target - new Date().getTime();
             if (diff > 0) {
-                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                document.getElementById('d').innerText = Math.floor(diff / 86400000);
+                document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
             }
         }
         setInterval(updateTimer, 1000);
@@ -587,7 +640,7 @@
             else { stub.style.display = 'none'; document.body.style.overflow = 'auto'; }
         }
         window.addEventListener('resize', checkDevice);
-        window.addEventListener('load', checkDevice);
+        checkDevice();
     </script>
 </body>
 </html>
