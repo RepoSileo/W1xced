@@ -157,6 +157,7 @@
         }
 
         .download-btn, .changelog-btn {
+            display: block;
             flex: 1;
             text-align: center;
             padding: 10px;
@@ -167,10 +168,11 @@
             transition: all 0.2s;
             cursor: pointer;
             border: none;
+            margin-top: 15px;
         }
 
         .download-btn { background: var(--accent); color: #fff; }
-        .changelog-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid var(--glass-border); }
+        .changelog-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid var(--glass-border); margin-top: 15px; }
         
         .download-btn:hover { opacity: 0.8; }
         .changelog-btn:hover { background: rgba(255, 255, 255, 0.15); }
@@ -344,8 +346,8 @@
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                     
                     <div class="btn-group">
-                        <a href="https://download1655.mediafire.com/k4kqtsgkb0qgJIHuMP_NJzBG7lTjHLebXN5ApNjDT1h52x5qLMkmaK5jhAgq7ly5QFVms0K1xGELamzZIbqfOF3tGIHmxmRM8BquU0awFsbh1t0leHH9rbw7O-RgJArvoRgQeuBIZ9DKOvc_QufMA54y6tBtmZ3jckMAsElH-cM/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn">Download ZIP</a>
-                        <button class="changelog-btn" onclick="openModal()">Change Log</button>
+                        <a href="https://download1655.mediafire.com/k4kqtsgkb0qgJIHuMP_NJzBG7lTjHLebXN5ApNjDT1h52x5qLMkmaK5jhAgq7ly5QFVms0K1xGELamzZIbqfOF3tGIHmxmRM8BquU0awFsbh1t0leHH9rbw7O-RgJArvoRgQeuBIZ9DKOvc_QufMA54y6tBtmZ3jckMAsElH-cM/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn" style="margin-top: 0;">Download ZIP</a>
+                        <button class="changelog-btn" onclick="openModal()" style="margin-top: 0;">Change Log</button>
                     </div>
                 </div>
             </div>
