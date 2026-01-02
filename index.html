@@ -65,6 +65,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        /* --- BACKGROUND BLOBS --- */
         .liquid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -79,13 +80,30 @@
             background: linear-gradient(135deg, var(--accent), #5856D6);
             border-radius: 50%;
             top: 10%; left: -5%;
-            animation: move 20s infinite alternate;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+
+        /* Правый круг теперь в сине-фиолетовых тонах */
+        .blob-right {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: linear-gradient(135deg, #0047AB, #8E56D6);
+            border-radius: 50%;
+            bottom: -15%; right: -10%;
+            animation: moveRight 25s infinite alternate ease-in-out;
+            opacity: 0.6; /* Уменьшил прозрачность, чтобы не слепило */
         }
 
         @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(120px, 80px); }
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(120px, 80px) rotate(30deg); }
         }
+
+        @keyframes moveRight {
+            from { transform: translate(0, 0) scale(1.1); }
+            to { transform: translate(-100px, -150px) scale(1); }
+        }
+        /* -------------------------- */
 
         .container {
             width: 100%;
@@ -305,7 +323,10 @@
 
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
 
-    <div class="liquid-bg"><div class="blob"></div></div>
+    <div class="liquid-bg">
+        <div class="blob"></div>
+        <div class="blob-right"></div>
+    </div>
 
     <div class="modal-overlay" id="changelogModal">
         <div class="modal-content">
@@ -389,7 +410,7 @@
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced & 127.0.0.0</span></div>
                     
                     <div class="btn-group">
-                        <a href="https://download1655.mediafire.com/k4kqtsgkb0qgJIHuMP_NJzBG7lTjHLebXN5ApNjDT1h52x5qLMkmaK5jhAgq7ly5QFVms0K1xGELamzZIbqfOF3tGIHmxmRM8BquU0awFsbh1t0leHH9rbw7O-RgJArvoRgQeuBIZ9DKOvc_QufMA54y6tBtmZ3jckMAsElH-cM/ler7e3s1bjkq5ep/LIBDock.zip" class="download-btn" style="margin-top: 0;">Download ZIP</a>
+                        <a href="https://download1655.mediafire.com/..." class="download-btn" style="margin-top: 0;">Download ZIP</a>
                         <button class="changelog-btn" onclick="openModal()" style="margin-top: 0;">Change Log</button>
                     </div>
                 </div>
@@ -407,7 +428,7 @@
                     <div class="stat-item"><span class="stat-label">Released</span><span class="stat-value">December 13</span></div>
                     <div class="stat-item"><span class="stat-label">Bypass</span><span class="stat-value">Personal</span></div>
                     <div class="stat-item"><span class="stat-label">Created By</span><span class="stat-value">W1xced</span></div>
-                    <a href="https://download1349.mediafire.com/jm23e97hpkeg6n4QApwhUQ5OX_QBjaoD1o7YJt5coZiMQRLbbwoaxBV4KdgfXUQvkvIokmW7mtK2kF0ugglU1NMZjVcw7JlPpkWKjyqVHFJftKmTDk_Foj6lUIJro_JQOBMCilfFtOIEVb-UP4MvbSVWvBKnK2uXOK2LH8U7LpQ/rnrd3el23glyjqx/MyDockFinder.zip" class="download-btn">Download ZIP</a>
+                    <a href="https://download1349.mediafire.com/..." class="download-btn">Download ZIP</a>
                 </div>
             </div>
 
@@ -449,9 +470,7 @@
         function toggleTheme() {
             const body = document.body;
             const btn = document.getElementById('themeToggle');
-            
             body.classList.toggle('light-mode');
-            
             if (body.classList.contains('light-mode')) {
                 btn.innerText = '🔆';
                 localStorage.setItem('theme', 'light');
@@ -470,7 +489,6 @@
             const target = new Date('January 1, 2027 00:00:00').getTime();
             const now = new Date().getTime();
             const diff = target - now;
-            
             if (diff > 0) {
                 document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
                 document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
