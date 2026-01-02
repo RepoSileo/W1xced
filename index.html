@@ -67,9 +67,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-main);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* --- MOBILE STUB STYLE --- */
@@ -160,6 +160,7 @@
 
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* TYPING EFFECT CSS */
         h1 { font-size: 32px; font-weight: 700; letter-spacing: -1px; min-height: 38px; }
         .cursor {
             display: inline-block;
@@ -325,7 +326,7 @@
         .device-info { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .device-icon { width: 60px; height: 60px; margin-bottom: 15px; object-fit: contain; }
         .device-name { font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
-        .spec-line { font-size: 10px; color: var(--text-sec); margin-bottom: 4px; width: 100%; display: flex; justify-content: center; gap: 4px; }
+        .spec-line { font-size: 10px; color: var(--text-sec); margin-bottom: 4px; width: 100%; display: center; justify-content: center; gap: 4px; }
         .spec-line b { color: var(--text-main); font-weight: 600; }
         
         .footer { margin-top: 40px; font-size: 11px; color: var(--text-sec); opacity: 0.5; letter-spacing: 2px; text-align: center; }
@@ -395,9 +396,9 @@
                         <div class="download-wrapper">
                             <button class="download-btn" id="lang-dl-zip" onclick="toggleDropdown(event)">Download ZIP</button>
                             <div class="dropdown-menu" id="libdockMenu">
-                                <a href="https://download1655.mediafire.com/..." class="dropdown-item">Release <span id="lang-dl-rec">1.7 Released (Recommended)</span></a>
-                                <a href="https://download1078.mediafire.com/..." class="dropdown-item">Beta <span>1.7 Alpha 3</span></a>
-                                <a href="https://download853.mediafire.com/..." class="dropdown-item">Alpha <span>1.7 Beta 3</span></a>
+                                <a href="..." class="dropdown-item">Release <span id="lang-dl-rec">1.7 Released (Recommended)</span></a>
+                                <a href="..." class="dropdown-item">Beta <span>1.7 Alpha 3</span></a>
+                                <a href="..." class="dropdown-item">Alpha <span>1.7 Beta 3</span></a>
                             </div>
                         </div>
                         <button class="changelog-btn" id="lang-cl-btn" onclick="openModal()">Change Log</button>
@@ -416,7 +417,7 @@
                 <div class="stats-panel">
                     <div class="stat-item"><span class="stat-label" id="lang-stat-rel">Released</span><span class="stat-value">December 13</span></div>
                     <div class="stat-item"><span class="stat-label" id="lang-stat-status">Status</span><span class="stat-value">Working</span></div>
-                    <a href="https://download1349.mediafire.com/..." class="download-btn" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
+                    <a href="..." class="download-btn" id="lang-dl-zip2" style="margin-top:12px; text-decoration:none;">Download ZIP</a>
                 </div>
             </div>
 
@@ -475,7 +476,7 @@
     </div>
 
     <script>
-        
+        // --- TRANSLATION SYSTEM ---
         const translations = {
             en: {
                 mobTitle: "Mobile version is under development",
@@ -544,6 +545,7 @@
             document.getElementById('lang-stat-icons').innerText = l.statIcons;
             document.getElementById('lang-stat-by').innerText = l.statBy;
             document.getElementById('lang-dl-zip').innerText = l.dlZip;
+            document.getElementById('lang-dl-zip2').innerText = l.dlZip;
             document.getElementById('lang-dl-rec').innerText = l.dlRec;
             document.getElementById('lang-cl-btn').innerText = l.clBtn;
             document.getElementById('lang-mdf-desc').innerText = l.mdfDesc;
@@ -576,7 +578,7 @@
             applyLang();
         }
 
-        // --- ЭФФЕКТ ПЕЧАТИ ---
+        // --- TYPING EFFECT ---
         const nickName = "W1xced";
         const typingElement = document.getElementById('typing-nick');
         let typeIdx = 0;
@@ -590,7 +592,7 @@
             }
         }
 
-        
+        // --- THEME ---
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
@@ -599,11 +601,17 @@
             document.getElementById('winIcon').src = isLight ? 'LogoWindows_light.png' : 'LogoWindows_dark.png';
         }
 
-        
+        // --- INIT ---
         window.addEventListener('load', () => {
             applyLang();
             setTimeout(type, 500);
-            if (localStorage.getItem('theme') === 'light') toggleTheme();
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').innerText = '🔆';
+                document.getElementById('winIcon').src = 'LogoWindows_light.png';
+            } else {
+                document.getElementById('winIcon').src = 'LogoWindows_dark.png';
+            }
         });
 
         function toggleDropdown(event) {
